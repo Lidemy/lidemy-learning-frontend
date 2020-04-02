@@ -68,6 +68,7 @@ class Title extends React.PureComponent {
             <Avatar src={item.User.picture} />
             <span className="ml2">
               {item.User.nickname}
+              {item.User.slackId && `(${item.User.slackId})`}
             </span>
           </a>
           <Tooltip title={moment(item.createdAt).format("llll")}>
