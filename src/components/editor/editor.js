@@ -28,7 +28,7 @@ class Editor extends Component {
             </div>
           </TabPane>
           <TabPane tab="Preview" key="2">
-            <Markdown source={value} linkTarget="_blank" />
+            <Markdown source={value} />
           </TabPane>
         </Tabs>
       </div>

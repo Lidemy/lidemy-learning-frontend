@@ -12,7 +12,11 @@ const CodeBlock = ({ language, value }) => {
 };
 
 const Markdown = ({ source }) => (
-  <ReactMarkdown source={source} renderers={{ code: CodeBlock }} />
+  <ReactMarkdown
+    source={source}
+    renderers={{ code: CodeBlock }}
+    linkTarget="_blank"
+  />
 );
 
 export default Markdown;

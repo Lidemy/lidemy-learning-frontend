@@ -97,7 +97,7 @@ class Report extends React.PureComponent {
     return (
       <Card title={<Title item={item} isRead={isRead} />}>
         <div style={{ height, overflow: "auto", whiteSpace: "pre-wrap" }}>
-          <Markdown source={item.content} linkTarget="_blank" />
+          <Markdown source={item.content} />
         </div>
       </Card>
     );
