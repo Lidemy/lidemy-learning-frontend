@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import moment from "moment";
-import ReactMarkdown from "react-markdown";
+import Markdown from "../common/markdown";
 import {
   Collapse,
   Comment,
@@ -137,7 +137,7 @@ class News extends React.PureComponent {
           <div>
             <h2>{item.title}</h2>
             <div style={{ whiteSpace: "pre-wrap" }}>
-              <ReactMarkdown source={item.content} linkTarget="_blank" />
+              <Markdown source={item.content} />
             </div>
           </div>
         }

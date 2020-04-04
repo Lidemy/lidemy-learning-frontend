@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { withRouter } from "react-router-dom";
-import ReactMarkdown from "react-markdown";
+import Markdown from "../common/markdown";
 import {
   Row,
   Col,
@@ -10,7 +10,8 @@ import {
   Checkbox,
   message,
   Button,
-  Tooltip
+  Tooltip,
+  Tag
 } from "antd";
 import moment from "moment";
 import debounce from "lodash/debounce";
@@ -19,60 +20,84 @@ import storage from "../../utils/storage";
 import Editor from "../editor";
 import Loading from "../loading";
 
+class Title extends React.PureComponent {
+  constructor(props) {
+    super(props);
+  }
+
+  render() {
+    const { isRead, item } = this.props;
+    return (
+      <div>
+        <div
+          className="absolute"
+          style={{
+            top: "0",
+            left: "0",
+            padding: "0px 0px 0px 2px",
+            fontSize: "12px"
+          }}
+        >
+          #{item.id}
+        </div>
+        <div
+          className="absolute"
+          style={{
+            marginTop: "-3px",
+            right: "-3px",
+            width: "6px",
+            height: "6px",
+            borderRadius: "50%",
+            background: "red",
+            visibility: isRead ? "hidden" : "visible"
+          }}
+        />
+        <div
+          className="flex items-center justify-between relative"
+          style={{
+            top: "6px"
+          }}
+        >
+          <a
+            className="flex items-center"
+            href={`/users/${item.User.id}`}
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            <Avatar src={item.User.picture} />
+            <span className="ml2">
+              {item.User.nickname}
+              {item.User.slackId && `(${item.User.slackId})`}
+            </span>
+          </a>
+          <Tooltip title={moment(item.createdAt).format("llll")}>
+            <div>{moment(item.createdAt).format("YYYY-MM-DD")}</div>
+          </Tooltip>
+        </div>
+        <div
+          className="flex items-center flex-start relative"
+          style={{
+            marginTop: "20px"
+          }}
+        >
+          {item.User.isTA && <Tag color="green">助教</Tag>}
+          {item.User.isAdmin && <Tag color="red">管理員</Tag>}
+          {item.User.isStudent && (
+            <Tag color="blue">第 {item.User.role} 期學生</Tag>
+          )}
+        </div>
+      </div>
+    );
+  }
+}
+
 class Report extends React.PureComponent {
   render() {
     const { item, height, isRead } = this.props;
     return (
-      <Card
-        title={
-          <div>
-            <div
-              className="absolute"
-              style={{
-                top: "0",
-                left: "0",
-                padding: "0px 0px 0px 2px",
-                fontSize: "12px"
-              }}
-            >
-              #{item.id}
-            </div>
-            <div
-              className="absolute"
-              style={{
-                top: "-3px",
-                right: "-3px",
-                width: "6px",
-                height: "6px",
-                borderRadius: "50%",
-                background: "red",
-                visibility: isRead ? "hidden" : "visible"
-              }}
-            />
-            <div
-              className="flex items-center justify-between relative"
-              style={{
-                top: "6px"
-              }}
-            >
-              <a
-                className="flex items-center"
-                href={`/users/${item.User.id}`}
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <Avatar src={item.User.picture} />
-                <span className="ml2">{item.User.nickname}</span>
-              </a>
-              <Tooltip title={moment(item.createdAt).format("llll")}>
-                <div>{moment(item.createdAt).format("YYYY-MM-DD")}</div>
-              </Tooltip>
-            </div>
-          </div>
-        }
-      >
+      <Card title={<Title item={item} isRead={isRead} />}>
         <div style={{ height, overflow: "auto", whiteSpace: "pre-wrap" }}>
-          <ReactMarkdown source={item.content} linkTarget="_blank" />
+          <Markdown source={item.content} />
         </div>
       </Card>
     );

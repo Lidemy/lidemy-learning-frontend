@@ -15,7 +15,7 @@ import {
   message
 } from "antd";
 import { withRouter } from "react-router-dom";
-import ReactMarkdown from "react-markdown";
+import Markdown from "../common/markdown";
 import moment from "moment";
 import Loading from "../loading";
 import ReportModal from "./reportModal";
@@ -26,7 +26,7 @@ const pageSize = 10;
 class MarkdownView extends React.PureComponent {
   render() {
     const { value } = this.props;
-    return <ReactMarkdown source={value} linkTarget="_blank" />;
+    return <Markdown source={value} />;
   }
 }
 

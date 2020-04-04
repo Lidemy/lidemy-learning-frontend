@@ -1,6 +1,6 @@
 import React, { Component } from "react";
-import ReactMarkdown from "react-markdown";
 import { Input, Tabs, Button } from "antd";
+import Markdown from "../common/markdown";
 
 const { TextArea } = Input;
 const TabPane = Tabs.TabPane;
@@ -28,7 +28,7 @@ class Editor extends Component {
             </div>
           </TabPane>
           <TabPane tab="Preview" key="2">
-            <ReactMarkdown source={value} />
+            <Markdown source={value} />
           </TabPane>
         </Tabs>
       </div>
