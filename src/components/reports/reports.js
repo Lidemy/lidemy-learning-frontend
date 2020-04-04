@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import { withRouter } from "react-router-dom";
-import ReactMarkdown from "react-markdown";
-import CodeBlock from "../codeBlock";
+import Markdown from "../common/markdown";
 import {
   Row,
   Col,
@@ -98,11 +97,7 @@ class Report extends React.PureComponent {
     return (
       <Card title={<Title item={item} isRead={isRead} />}>
         <div style={{ height, overflow: "auto", whiteSpace: "pre-wrap" }}>
-          <ReactMarkdown
-            source={item.content}
-            renderers={{ code: CodeBlock }}
-            linkTarget="_blank"
-          />
+          <Markdown source={item.content} linkTarget="_blank" />
         </div>
       </Card>
     );
