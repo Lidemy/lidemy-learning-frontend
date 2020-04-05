@@ -45,6 +45,7 @@ class App extends Component {
             </a>
             <br />
             Last updated: 2019-06-04 10:30:00
+            test 時間
           </Footer>
         </Layout>
       </Router>
