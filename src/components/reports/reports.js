@@ -64,27 +64,31 @@ class Title extends React.PureComponent {
             target="_blank"
             rel="noopener noreferrer"
           >
-            <Avatar src={item.User.picture} />
-            <span className="ml2">
-              {item.User.nickname}
-              {item.User.slackId && `(${item.User.slackId})`}
-            </span>
+            <Avatar size="large" src={item.User.picture} />
+            <div style={{
+              marginLeft: "15px"
+            }}>
+              <span 
+                className="ml2"
+                style={{
+                  margin: "0"
+                }}
+              >
+                {item.User.nickname}
+                {item.User.slackId && `(${item.User.slackId})`}
+              </span>
+              <div className="flex items-center flex-start relative">
+                {item.User.isTA && <Tag color="green">助教</Tag>}
+                {item.User.isAdmin && <Tag color="red">管理員</Tag>}
+                {item.User.isStudent && (
+                  <Tag color="blue">第 {item.User.role} 期學生</Tag>
+                )}
+              </div>
+            </div>
           </a>
           <Tooltip title={moment(item.createdAt).format("llll")}>
             <div>{moment(item.createdAt).format("YYYY-MM-DD")}</div>
           </Tooltip>
-        </div>
-        <div
-          className="flex items-center flex-start relative"
-          style={{
-            marginTop: "20px"
-          }}
-        >
-          {item.User.isTA && <Tag color="green">助教</Tag>}
-          {item.User.isAdmin && <Tag color="red">管理員</Tag>}
-          {item.User.isStudent && (
-            <Tag color="blue">第 {item.User.role} 期學生</Tag>
-          )}
         </div>
       </div>
     );
