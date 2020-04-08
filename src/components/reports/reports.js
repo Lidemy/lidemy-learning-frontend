@@ -43,7 +43,7 @@ class Title extends React.PureComponent {
         <div
           className="absolute"
           style={{
-            marginTop: "-3px",
+            marginTop: "-18px",
             right: "-3px",
             width: "6px",
             height: "6px",
