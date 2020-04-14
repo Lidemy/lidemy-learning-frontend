@@ -1,63 +1,71 @@
-import React, { Component } from "react";
-import { Modal, Input } from "antd";
+import React, { useState, useEffect } from "react";
+import { Modal, Input, Tag } from "antd";
 
-class NameModal extends Component {
-  state = {
-    nickname: ""
+const NameModal = ({ visible, instance, onCancel, onConfirm }) => {
+  const init = {
+    nickname: "",
+    slackId: ""
   };
+  const [eachEntry, setEachEntry] = useState(init);
+  const { nickname, slackId, isTA, isAdmin, isStudent, role } = eachEntry;
 
-  componentDidUpdate = prevProps => {
-    const { instance } = this.props;
-    if (prevProps.instance !== instance && instance) {
-      this.setState({
-        nickname: instance.nickname
-      });
-    }
-  };
-
-  handleCancel = () => {
-    const { onCancel, instance } = this.props;
-    this.setState(
-      {
-        nickname: instance.nickname
-      },
-      onCancel
-    );
-  };
-
-  handleConfirm = () => {
-    const { onConfirm, onCancel, instance } = this.props;
+  const handleConfirm = () => {
     onConfirm({
-      ...instance,
-      nickname: this.state.nickname
+      ...eachEntry
     });
     onCancel();
   };
 
-  onNameChange = e => {
-    this.setState({
-      nickname: e.target.value
+  const handleCancel = () => {
+    setEachEntry({
+      ...instance
+    });
+    onCancel();
+  };
+
+  const handleInputChange = evt => {
+    setEachEntry({
+      ...eachEntry,
+      [evt.target.name]: evt.target.value
     });
   };
 
-  render() {
-    const { nickname } = this.state;
-    const { visible } = this.props;
-    return (
-      <Modal
-        title="修改暱稱"
-        okText="送出"
-        cancelText="取消"
-        onOk={this.handleConfirm}
-        onCancel={this.handleCancel}
-        visible={visible}
-      >
+  useEffect(
+    () => {
+      setEachEntry({
+        ...instance
+      });
+    },
+    [instance]
+  );
+
+  return (
+    <Modal
+      title="個人資料"
+      okText="送出"
+      cancelText="取消"
+      onOk={handleConfirm}
+      onCancel={handleCancel}
+      visible={visible}
+    >
+      <div class="mb2">
+        <label>身份：</label>
         <div>
-          <Input onChange={this.onNameChange} value={nickname} />
+          {isTA && <Tag color="green">助教</Tag>}
+          {isAdmin && <Tag color="red">管理員</Tag>}
+          {isStudent && <Tag color="blue">第 {role} 期學生</Tag>}
         </div>
-      </Modal>
-    );
-  }
-}
+      </div>
+      <div class="mb2">
+        <label>更改暱稱：</label>
+        <Input onChange={handleInputChange} name="nickname" value={nickname} />
+      </div>
+      <div class="mb2">
+        <label>更改 Slack Id:</label>
+        <Input onChange={handleInputChange} name="slackId" value={slackId} />
+      </div>
+    </Modal>
+  );
+};
 
 export default NameModal;

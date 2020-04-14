@@ -129,7 +129,7 @@ class Header extends Component {
                   marginRight: "10px"
                 }}
               />
-              <div>{user.nickname || ""}</div>
+              <div>{`${user.nickname}${user.slackId ? "("+user.slackId+")": ""}` || ""}</div>
             </div>
           )}
 
@@ -141,7 +141,7 @@ class Header extends Component {
 
           {!isMobile && isLogin && user && user.nickname && (
             <Button className="mr2" onClick={this.openModal}>
-              更改暱稱
+              個人資料
             </Button>
           )}
           {!isMobile && isLogin && (
