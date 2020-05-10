@@ -54,6 +54,9 @@ const search = (userType, dataIndex, handleSearch, handleReset) => ({
     }
   },
   render: (text, row) => {
+    if (userType === "user") {
+      text = row[userType].id;
+    }
     if (userType !== null) {
       return (
         <a href={`/users/${text}`} target="_blank" rel="noopener noreferrer">

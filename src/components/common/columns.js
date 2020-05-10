@@ -39,7 +39,11 @@ const columns = [
     title: "學生",
     dataIndex: "UserId",
     render: (UserId, row) => (
-      <a href={`/users/${UserId}`} target="_blank" rel="noopener noreferrer">
+      <a
+        href={`/users/${row.user.id}`}
+        target="_blank"
+        rel="noopener noreferrer"
+      >
         <Avatar size="small" src={row.user.picture} />
         <span className="ml2">
           {row.user.nickname}

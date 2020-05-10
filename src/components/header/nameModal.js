@@ -48,7 +48,7 @@ const NameModal = ({ visible, instance, onCancel, onConfirm }) => {
       onCancel={handleCancel}
       visible={visible}
     >
-      <div class="mb2">
+      <div className="mb2">
         <label>身份：</label>
         <div>
           {isTA && <Tag color="green">助教</Tag>}

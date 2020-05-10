@@ -71,6 +71,9 @@ class Header extends Component {
     const { modalOpen } = this.state;
     const { user, isLogin, isLoadingUpdateUser } = this.props;
     const isMobile = window.innerWidth <= 1194;
+    const isTA = user && (user.isTA || user.isAdmin);
+    const isAdmin = user && user.isAdmin;
+
     return (
       <AntdHeader className="fixed w-100 z-5">
         {isLoadingUpdateUser && <Loading />}
@@ -105,17 +108,17 @@ class Header extends Component {
               <Link to="/homeworks">作業列表</Link>
             </Menu.Item>
           )}
-          {user && user.isTA && (
+          {isTA && (
             <Menu.Item key="reviews">
               <Link to="/reviews">批改列表</Link>
             </Menu.Item>
           )}
-          {user && user.isAdmin && (
+          {isAdmin && (
             <Menu.Item key="adminNews">
               <Link to="/admin/news">最新消息</Link>
             </Menu.Item>
           )}
-          {user && user.isAdmin && (
+          {isAdmin && (
             <Menu.Item key="ta">
               <Link to="/admin/ta">助教列表</Link>
             </Menu.Item>

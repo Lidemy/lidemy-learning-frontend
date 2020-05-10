@@ -21,10 +21,6 @@ import Editor from "../editor";
 import Loading from "../loading";
 
 class Title extends React.PureComponent {
-  constructor(props) {
-    super(props);
-  }
-
   render() {
     const { isRead, item } = this.props;
     return (
@@ -77,13 +73,16 @@ class Title extends React.PureComponent {
                 }}
               >
                 {item.User.nickname}
-                {item.User.slackId && `(${item.User.slackId})`}
+                {item.User.slackId && `(@${item.User.slackId})`}
               </span>
               <div className="flex items-center flex-start relative">
                 {item.User.isTA && <Tag color="green">助教</Tag>}
                 {item.User.isAdmin && <Tag color="red">管理員</Tag>}
-                {item.User.isStudent && (
-                  <Tag color="blue">第 {item.User.semester} 期學生</Tag>
+                {item.User.isStudent && item.User.semester && (
+                  <Tag color="blue">第 {item.User.semester || "?"} 期學生</Tag>
+                )}
+                {item.User.isStudent && !item.User.semester && (
+                  <Tag color="blue">學生</Tag>
                 )}
               </div>
             </div>

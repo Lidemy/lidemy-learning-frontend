@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Table, Typography, Tabs, Button, Switch } from "antd";
+import { Table, Typography, Tabs, Switch } from "antd";
 import { useSelector, useDispatch } from "react-redux";
 import columns from "../common/columns";
 import Loading from "../loading";

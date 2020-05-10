@@ -1,4 +1,4 @@
-const isProduction = process.env.NODE_ENV === "production";
+// const isProduction = process.env.NODE_ENV === "production";
 
 const config = {
   firebase: {
@@ -9,7 +9,7 @@ const config = {
     storageBucket: "lidemy-learning.appspot.com",
     messagingSenderId: "623325319301"
   },
-  apiHost: "https://learning-api.qootest.com/v1"
+  apiHost: "https://learning-api.lidemy.com/v1"
 };
 
 export default config;

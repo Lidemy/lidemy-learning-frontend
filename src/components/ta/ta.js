@@ -28,15 +28,21 @@ const columns = [
   },
   {
     title: "最新批改",
-    render: row => (
-      <a
-        target="_blank"
-        rel="noopener noreferrer"
-        href={row.homeworks[0].prUrl}
-      >
-        week{row.homeworks[0].week}
-      </a>
-    )
+    render: row => {
+      let hasHomework = false;
+      if (row.homeworks && row.homeworks.length > 0) {
+        hasHomework = true;
+      }
+      return (
+        <a
+          target="_blank"
+          rel="noopener noreferrer"
+          href={hasHomework ? row.homeworks[0].prUrl : "#"}
+        >
+          {hasHomework ? `week${row.homeworks[0].week}` : "無"}
+        </a>
+      );
+    }
   },
   {
     title: "待批改數量",
