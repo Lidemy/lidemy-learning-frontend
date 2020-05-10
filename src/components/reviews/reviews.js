@@ -36,7 +36,7 @@ const Reviews = () => {
     }
   };
 
-  const getTAHomeworks = TAId => dispatch(Actions.GET_TA_HOMEWORKS(TAId));
+  const getHomeworks = payload => dispatch(Actions.GET_HOMEWORKS(payload));
   const likeHomework = id => dispatch(Actions.LIKE_HOMEWORK(id));
   const achieveHomework = id => dispatch(Actions.ACHIEVE_HOMEWORK(id));
   const toggleTA = () => dispatch(Actions.TOGGLE_TA_STATUS());
@@ -88,7 +88,9 @@ const Reviews = () => {
 
   useEffect(
     () => {
-      getTAHomeworks(userId);
+      getHomeworks({
+        TAId: userId
+      });
     },
     [userId, isLoadingUpdateHomework]
   );

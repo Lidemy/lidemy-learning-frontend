@@ -188,19 +188,11 @@ const { Actions, Constants } = EasyActions({
     return { type, error };
   },
 
-  GET_HOMEWORKS(type, id) {
-    return { type, id };
+  GET_HOMEWORKS(type, payload) {
+    return { type, payload };
   },
 
   GET_HOMEWORKS_RESULT(type, error, list) {
-    return { type, error, list };
-  },
-
-  GET_TA_HOMEWORKS(type, id) {
-    return { type, id };
-  },
-
-  GET_TA_HOMEWORKS_RESULT(type, error, list) {
     return { type, error, list };
   },
 

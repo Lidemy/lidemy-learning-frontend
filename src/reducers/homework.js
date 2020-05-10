@@ -3,11 +3,9 @@ import { ActionTypes } from "../actions";
 const defaultState = {
   homeworks: [],
   isLoadingGetHomeworks: false,
-  isLoadingGetTAHomeworks: false,
   isLoadingCreateHomework: false,
   isLoadingUpdateHomework: false,
   getHomeworksError: null,
-  getTAHomeworksError: null,
   createHomeworkError: null,
   homeworkUpdateError: null
 };
@@ -40,21 +38,6 @@ function homeworkReducer(state = defaultState, action) {
         ...state,
         isLoadingGetHomeworks: false,
         getHomeworksError: action.error,
-        homeworks: action.list
-      };
-
-    case ActionTypes.GET_TA_HOMEWORKS:
-      return {
-        ...state,
-        isLoadingGetTAHomeworks: true,
-        getTAHomeworksError: null
-      };
-
-    case ActionTypes.GET_TA_HOMEWORKS_RESULT:
-      return {
-        ...state,
-        isLoadingGetTAHomeworks: false,
-        getTAHomeworksError: action.error,
         homeworks: action.list
       };
 

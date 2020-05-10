@@ -49,8 +49,8 @@ export const updateNews = (id, params) =>
 
 // homeworks
 export const createHomework = payload => instance.post("/homeworks", payload);
-export const getHomeworks = id => instance.get("/homeworks/" + id);
-export const getTAHomeworks = id => instance.get(`/homeworks?TAId=${id}`);
+export const getHomeworks = payload =>
+  instance.get(`/homeworks?UserId=${payload.userId}&TAId=${payload.TAId}`);
 export const likeHomework = id => instance.get("/homeworks/" + id + "/like");
 export const achieveHomework = id =>
   instance.get("/homeworks/" + id + "/achieve");

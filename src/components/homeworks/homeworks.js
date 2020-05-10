@@ -24,7 +24,7 @@ const Homeworks = () => {
     ...state.auth
   }));
   const dispatch = useDispatch();
-  const getHomeworks = id => dispatch(Actions.GET_HOMEWORKS(id));
+  const getHomeworks = payload => dispatch(Actions.GET_HOMEWORKS(payload));
   const createHomework = payload => dispatch(Actions.CREATE_HOMEWORK(payload));
 
   const changeTab = key => {
@@ -80,7 +80,9 @@ const Homeworks = () => {
 
   useEffect(
     () => {
-      getHomeworks(userId);
+      getHomeworks({
+        UserId: userId
+      });
     },
     [userId, isLoadingCreateHomework]
   );
