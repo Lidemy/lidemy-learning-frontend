@@ -18,6 +18,10 @@ export const register = code =>
   });
 export const updateUser = (id, params) => instance.put("/users/" + id, params);
 
+// ta
+export const getTAs = () => instance.get("/ta");
+export const toggleTA = () => instance.get("/ta/toggle/");
+
 // progress
 export const progressUp = () => instance.post("/progress/up");
 export const progressDown = () => instance.post("/progress/down");
@@ -42,3 +46,11 @@ export const deleteNews = id => instance.delete("/admin/news/" + id);
 export const getNews = id => instance.get("/admin/news/" + id);
 export const updateNews = (id, params) =>
   instance.put("/admin/news/" + id, params);
+
+// homeworks
+export const createHomework = payload => instance.post("/homeworks", payload);
+export const getHomeworks = id => instance.get("/homeworks/" + id);
+export const getTAHomeworks = id => instance.get(`/homeworks?TAId=${id}`);
+export const likeHomework = id => instance.get("/homeworks/" + id + "/like");
+export const achieveHomework = id =>
+  instance.get("/homeworks/" + id + "/achieve");

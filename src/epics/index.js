@@ -4,6 +4,7 @@ import * as authEpics from "./authEpics";
 import * as adminEpics from "./adminEpics";
 import * as userEpics from "./userEpics";
 import * as reportEpics from "./reportEpics";
+import * as homeworkEpics from "./homeworkEpics";
 
 const combineEpicFunctions = epics => {
   return epics.reduce((arr, epic) => {
@@ -15,7 +16,8 @@ const epics = combineEpicFunctions([
   authEpics,
   adminEpics,
   userEpics,
-  reportEpics
+  reportEpics,
+  homeworkEpics
 ]);
 
 export const rootEpic = combineEpics(...epics);

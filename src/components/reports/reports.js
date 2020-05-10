@@ -65,10 +65,12 @@ class Title extends React.PureComponent {
             rel="noopener noreferrer"
           >
             <Avatar size="large" src={item.User.picture} />
-            <div style={{
-              marginLeft: "15px"
-            }}>
-              <span 
+            <div
+              style={{
+                marginLeft: "15px"
+              }}
+            >
+              <span
                 className="ml2"
                 style={{
                   margin: "0"
@@ -81,7 +83,7 @@ class Title extends React.PureComponent {
                 {item.User.isTA && <Tag color="green">助教</Tag>}
                 {item.User.isAdmin && <Tag color="red">管理員</Tag>}
                 {item.User.isStudent && (
-                  <Tag color="blue">第 {item.User.role} 期學生</Tag>
+                  <Tag color="blue">第 {item.User.semester} 期學生</Tag>
                 )}
               </div>
             </div>
