@@ -4,9 +4,13 @@ const defaultState = {
   isLoadingUpdateProgress: false,
   progressUpdateError: null,
   isLoadingGetUserProfile: false,
+  isLoadingGetTAList: false,
+  getTAListError: false,
+
   userProfile: null,
   getUserProfileError: null,
 
+  TAList: [],
   userReports: [],
   isLoadingGetUserReports: false,
   getUserReportsError: null,
@@ -67,6 +71,7 @@ function userReducer(state = defaultState, action) {
       };
 
     case ActionTypes.UPDATE_USER:
+    case ActionTypes.TOGGLE_TA_STATUS:
       return {
         ...state,
         isLoadingUpdateUser: true,
@@ -74,10 +79,26 @@ function userReducer(state = defaultState, action) {
       };
 
     case ActionTypes.UPDATE_USER_RESULT:
+    case ActionTypes.TOGGLE_TA_STATUS_RESULT:
       return {
         ...state,
         isLoadingUpdateUser: false,
         updateUserError: action.error
+      };
+
+    case ActionTypes.GET_TA_LIST:
+      return {
+        ...state,
+        isLoadingGetTAList: true,
+        getTAListError: null
+      };
+
+    case ActionTypes.GET_TA_LIST_RESULT:
+      return {
+        ...state,
+        isLoadingGetTAList: false,
+        getTAListError: action.error,
+        TAList: action.list
       };
 
     default:

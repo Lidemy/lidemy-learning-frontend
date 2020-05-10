@@ -32,6 +32,9 @@ class Header extends Component {
     const pathname = location.pathname;
     if (pathname.indexOf("/reports") === 0) return "reports";
     if (pathname.indexOf("/profile") === 0) return "profile";
+    if (pathname.indexOf("/homeworks") === 0) return "homeworks";
+    if (pathname.indexOf("/reviews") === 0) return "reviews";
+    if (pathname.indexOf("/admin/ta") === 0) return "ta";
     if (pathname.indexOf("/admin/news") === 0) return "adminNews";
     return "home";
   };
@@ -67,7 +70,7 @@ class Header extends Component {
   render() {
     const { modalOpen } = this.state;
     const { user, isLogin, isLoadingUpdateUser } = this.props;
-    const isMobile = window.innerWidth <= 768;
+    const isMobile = window.innerWidth <= 1194;
     return (
       <AntdHeader className="fixed w-100 z-5">
         {isLoadingUpdateUser && <Loading />}
@@ -97,9 +100,24 @@ class Header extends Component {
               <Link to="/profile">個人檔案</Link>
             </Menu.Item>
           )}
+          {user && (
+            <Menu.Item key="homeworks">
+              <Link to="/homeworks">作業列表</Link>
+            </Menu.Item>
+          )}
+          {user && user.isTA && (
+            <Menu.Item key="reviews">
+              <Link to="/reviews">批改列表</Link>
+            </Menu.Item>
+          )}
           {user && user.isAdmin && (
             <Menu.Item key="adminNews">
               <Link to="/admin/news">最新消息</Link>
+            </Menu.Item>
+          )}
+          {user && user.isAdmin && (
+            <Menu.Item key="ta">
+              <Link to="/admin/ta">助教列表</Link>
             </Menu.Item>
           )}
           {isMobile && user && isLogin && (
@@ -111,7 +129,7 @@ class Header extends Component {
           )}
         </Menu>
         <div
-          className="absolute white flex items-center"
+          className="absolute white flex-l dn items-center"
           style={{
             right: "32px",
             top: 0,
@@ -129,7 +147,7 @@ class Header extends Component {
                   marginRight: "10px"
                 }}
               />
-              <div>{`${user.nickname}${user.slackId ? "("+user.slackId+")": ""}` || ""}</div>
+              <div>{user.nickname || ""}</div>
             </div>
           )}
 
@@ -141,7 +159,7 @@ class Header extends Component {
 
           {!isMobile && isLogin && user && user.nickname && (
             <Button className="mr2" onClick={this.openModal}>
-              個人資料
+              更改資料
             </Button>
           )}
           {!isMobile && isLogin && (

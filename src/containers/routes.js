@@ -7,6 +7,9 @@ import Reports from "./reports";
 import Profile from "./profile";
 import Guest from "./guest";
 import AdminNews from "./adminNews";
+import Homeworks from "../components/homeworks";
+import Reviews from "../components/reviews";
+import TA from "../components/ta";
 
 const Routes = ({ user }) => {
   if (!user) {
@@ -18,6 +21,9 @@ const Routes = ({ user }) => {
       <Route path="/reports" component={Reports} />
       <Route path="/profile" component={Profile} />
       <Route path="/users/:id" component={Profile} />
+      {user.isStudent && <Route path="/homeworks" component={Homeworks} />}
+      {user.isTA && <Route path="/reviews" component={Reviews} />}
+      {user.isAdmin && <Route path="/admin/ta" component={TA} />}
       {user.isAdmin && <Route path="/admin/news" component={AdminNews} />}
     </Switch>
   );

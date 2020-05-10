@@ -7,7 +7,7 @@ const NameModal = ({ visible, instance, onCancel, onConfirm }) => {
     slackId: ""
   };
   const [eachEntry, setEachEntry] = useState(init);
-  const { nickname, slackId, isTA, isAdmin, isStudent, role } = eachEntry;
+  const { nickname, slackId, isTA, isAdmin, isStudent, semester } = eachEntry;
 
   const handleConfirm = () => {
     onConfirm({
@@ -53,7 +53,7 @@ const NameModal = ({ visible, instance, onCancel, onConfirm }) => {
         <div>
           {isTA && <Tag color="green">助教</Tag>}
           {isAdmin && <Tag color="red">管理員</Tag>}
-          {isStudent && <Tag color="blue">第 {role} 期學生</Tag>}
+          {isStudent && <Tag color="blue">第 {semester} 期學生</Tag>}
         </div>
       </div>
       <div class="mb2">

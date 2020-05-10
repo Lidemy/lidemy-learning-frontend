@@ -160,6 +160,68 @@ const { Actions, Constants } = EasyActions({
 
   UPDATE_REPORT_RESULT(type, error) {
     return { type, error };
+  },
+
+  // TA
+  TOGGLE_TA_STATUS(type) {
+    return { type };
+  },
+
+  TOGGLE_TA_STATUS_RESULT(type, error) {
+    return { type, error };
+  },
+
+  GET_TA_LIST(type) {
+    return { type };
+  },
+
+  GET_TA_LIST_RESULT(type, error, list) {
+    return { type, error, list };
+  },
+
+  // homework
+  CREATE_HOMEWORK(type, payload) {
+    return { type, payload };
+  },
+
+  CREATE_HOMEWORK_RESULT(type, error) {
+    return { type, error };
+  },
+
+  GET_HOMEWORKS(type, id) {
+    return { type, id };
+  },
+
+  GET_HOMEWORKS_RESULT(type, error, list) {
+    return { type, error, list };
+  },
+
+  GET_TA_HOMEWORKS(type, id) {
+    return { type, id };
+  },
+
+  GET_TA_HOMEWORKS_RESULT(type, error, list) {
+    return { type, error, list };
+  },
+
+  LIKE_HOMEWORK(type, id) {
+    return { type, id };
+  },
+
+  LIKE_HOMEWORK_RESULT(type, error) {
+    return { type, error };
+  },
+
+  ACHIEVE_HOMEWORK(type, id) {
+    return { type, id };
+  },
+
+  ACHIEVE_HOMEWORK_RESULT(type, error) {
+    return { type, error };
+  },
+
+  CLEAR_HOMEWORKS(type) {
+    return { type };
   }
 });
 

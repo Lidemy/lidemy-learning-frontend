@@ -59,3 +59,25 @@ export const updateUser = action$ =>
       )
     )
   );
+
+export const toggleTA = action$ =>
+  action$.pipe(
+    ofType(ActionTypes.TOGGLE_TA_STATUS),
+    switchMap(action =>
+      from(api.toggleTA()).pipe(
+        map(data => Actions.TOGGLE_TA_STATUS_RESULT(null)),
+        catchError(err => of(Actions.TOGGLE_TA_STATUS_RESULT(err.message)))
+      )
+    )
+  );
+
+export const getTAs = action$ =>
+  action$.pipe(
+    ofType(ActionTypes.GET_TA_LIST),
+    switchMap(action =>
+      from(api.getTAs()).pipe(
+        map(res => Actions.GET_TA_LIST_RESULT(null, res.data)),
+        catchError(err => of(Actions.GET_TA_LIST_RESULT(err.message)))
+      )
+    )
+  );
