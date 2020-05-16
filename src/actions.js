@@ -192,8 +192,8 @@ const { Actions, Constants } = EasyActions({
     return { type, payload };
   },
 
-  GET_HOMEWORKS_RESULT(type, error, list) {
-    return { type, error, list };
+  GET_HOMEWORKS_RESULT(type, error, list, count) {
+    return { type, error, list, count };
   },
 
   LIKE_HOMEWORK(type, id) {

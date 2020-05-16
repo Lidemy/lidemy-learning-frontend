@@ -11,11 +11,17 @@ const { Title } = Typography;
 const { TabPane } = Tabs;
 
 const Homeworks = () => {
+  const initParams = {
+    sort: "id",
+    order: "ASC",
+    page: 1
+  };
   const [userId, setUserId] = useState(null);
   const [visible, setVisible] = useState(false);
-
+  const [params, setParams] = useState(initParams);
   const {
     homeworks,
+    count,
     isLoadingCreateHomework,
     isLoadingGetHomeworks,
     user
@@ -33,6 +39,10 @@ const Homeworks = () => {
         setUserId(0);
         break;
       case "me":
+        setParams({
+          ...initParams,
+          UserId: userId
+        });
         setUserId(user.id);
         break;
       default:
@@ -78,13 +88,33 @@ const Homeworks = () => {
     ...search("user", "nickname", handleSearch, handleReset)
   };
 
+  const handleTableChange = (pagination, filters, sorter) => {
+    setParams({
+      sort: sorter.field,
+      order: sorter.order === "descend" ? "DESC" : "ASC",
+      page: pagination.current,
+      ...(filters.isLike &&
+        filters.isLike.length > 0 && { like: JSON.stringify(filters.isLike) }),
+      ...(filters.isAchieve &&
+        filters.isAchieve.length > 0 && {
+          achieve: JSON.stringify(filters.isAchieve)
+        }),
+      ...(filters.week &&
+        filters.week.length > 0 && { week: JSON.stringify(filters.week) }),
+      ...(filters.TAId &&
+        filters.TAId.length > 0 && { ta: JSON.stringify(filters.TAId) }),
+      ...(filters.UserId &&
+        filters.UserId.length > 0 && {
+          student: JSON.stringify(filters.UserId)
+        })
+    });
+  };
+
   useEffect(
     () => {
-      getHomeworks({
-        UserId: userId
-      });
+      getHomeworks(params);
     },
-    [userId, isLoadingCreateHomework]
+    [userId, params, isLoadingCreateHomework]
   );
 
   return (
@@ -104,8 +134,9 @@ const Homeworks = () => {
             dataSource={homeworks}
             scroll={{ x: 1280, y: 1080 }}
             rowKey="id"
+            onChange={handleTableChange}
             pagination={{
-              defaultPageSize: 10
+              total: count
             }}
           />
         </TabPane>
@@ -116,8 +147,9 @@ const Homeworks = () => {
             dataSource={homeworks}
             scroll={{ x: 1280, y: 1080 }}
             rowKey="id"
+            onChange={handleTableChange}
             pagination={{
-              defaultPageSize: 10
+              total: count
             }}
           />
         </TabPane>

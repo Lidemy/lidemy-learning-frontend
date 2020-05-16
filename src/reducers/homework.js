@@ -2,6 +2,7 @@ import { ActionTypes } from "../actions";
 
 const defaultState = {
   homeworks: [],
+  counts: 0,
   isLoadingGetHomeworks: false,
   isLoadingCreateHomework: false,
   isLoadingUpdateHomework: false,
@@ -38,7 +39,8 @@ function homeworkReducer(state = defaultState, action) {
         ...state,
         isLoadingGetHomeworks: false,
         getHomeworksError: action.error,
-        homeworks: action.list
+        homeworks: action.list,
+        count: action.count
       };
 
     case ActionTypes.LIKE_HOMEWORK:

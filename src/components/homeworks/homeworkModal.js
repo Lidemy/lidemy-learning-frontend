@@ -13,14 +13,14 @@ const HomeworkModal = ({ visible, onCancel, onConfirm }) => {
   const { week, prUrl } = eachEntry;
 
   const handleConfirm = () => {
-    if (prUrl) {
+    if (prUrl && prUrl.match("github")) {
       onConfirm({
         ...eachEntry
       });
       handleCancel();
       onCancel();
     } else {
-      setErr("pr 連結不得為空");
+      setErr("pr 連結不得為空或非 github pr 連結");
     }
   };
 

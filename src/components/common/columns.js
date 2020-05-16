@@ -8,7 +8,7 @@ const columns = [
     title: "ID",
     dataIndex: "id",
     render: (id, row) => id,
-    sorter: (a, b) => a.id - b.id,
+    sorter: true,
     defaultSortOrder: "descend"
   },
   {
@@ -19,7 +19,7 @@ const columns = [
         week{week}
       </a>
     ),
-    sorter: (a, b) => a.week - b.week,
+    sorter: true,
     defaultSortOrder: "descend"
   },
   {
@@ -62,7 +62,7 @@ const columns = [
         value: true
       }
     ],
-    onFilter: (value, row) => row.isLike === value,
+    filtered: true,
     render: isLike => isLike && <LikeOutlined />
   },
   {
@@ -79,14 +79,14 @@ const columns = [
         value: false
       }
     ],
-    onFilter: (value, row) => row.isAchieve === value,
+    filtered: true,
     render: isAchieve => isAchieve && <CheckOutlined />
   },
   {
     title: "建立時間",
     dataIndex: "createdAt",
     render: createdAt => <div>{moment(createdAt).format("YYYY-MM-DD")}</div>,
-    sorter: (a, b) => new Date(a.createdAt) - new Date(b.createdAt),
+    sorter: true,
     defaultSortOrder: "descend"
   }
 ];

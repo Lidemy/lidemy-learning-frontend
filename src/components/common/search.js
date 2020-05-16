@@ -40,19 +40,7 @@ const search = (userType, dataIndex, handleSearch, handleReset) => ({
   filterIcon: filtered => (
     <SearchOutlined style={{ color: filtered ? "#1890ff" : undefined }} />
   ),
-  onFilter: (value, record) => {
-    if (userType !== null) {
-      return record[userType][dataIndex]
-        .toString()
-        .toLowerCase()
-        .includes(value.toLowerCase());
-    } else {
-      return record[dataIndex]
-        .toString()
-        .toLowerCase()
-        .includes(value.toLowerCase());
-    }
-  },
+  filtered: true,
   render: (text, row) => {
     if (userType === "user") {
       text = row[userType].id;

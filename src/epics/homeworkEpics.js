@@ -10,7 +10,9 @@ export const getHomeworks = action$ =>
     ofType(ActionTypes.GET_HOMEWORKS),
     switchMap(action =>
       from(api.getHomeworks(action.payload)).pipe(
-        map(res => Actions.GET_HOMEWORKS_RESULT(null, res.data)),
+        map(res =>
+          Actions.GET_HOMEWORKS_RESULT(null, res.data.rows, res.data.count)
+        ),
         catchError(err => of(Actions.GET_HOMEWORKS_RESULT(err.message)))
       )
     )
