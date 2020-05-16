@@ -96,9 +96,9 @@ const Dashboard = ({ data }) => {
       : [...Array(5).keys()].map(num => (yExtent[1] / 5) * num);
 
   return (
-    <div className="flex-ns dn w-100 ">
-      <div className="flex flex-column w-10">
-        <div>
+    <div className="flex-ns flex-column dn w-100 ">
+      <div className="flex w-100">
+        <div class="mr2">
           <span
             className="dib v-mid br4 h1 w1 mr2"
             style={{
@@ -216,7 +216,9 @@ const TA = () => {
   return (
     <div>
       <Title level={3}>助教列表</Title>
-      <Dashboard data={homeworks} />
+      <div class="w-100 overflow-x-scroll">
+        <Dashboard data={homeworks} />
+      </div>
       <Table
         columns={columns}
         dataSource={TAList}
