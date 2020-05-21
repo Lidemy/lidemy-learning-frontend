@@ -18,6 +18,19 @@ export const getHomeworks = action$ =>
     )
   );
 
+export const getHomeworksAchieveData = action$ =>
+  action$.pipe(
+    ofType(ActionTypes.GET_HOMEWORKS_ACHIEVEDATA),
+    switchMap(() =>
+      from(api.getHomeworksAchieveData()).pipe(
+        map(res => Actions.GET_HOMEWORKS_ACHIEVEDATA_RESULT(null, res.data)),
+        catchError(err =>
+          of(Actions.GET_HOMEWORKS_ACHIEVEDATA_RESULT(err.message))
+        )
+      )
+    )
+  );
+
 export const createHomework = action$ =>
   action$.pipe(
     ofType(ActionTypes.CREATE_HOMEWORK),

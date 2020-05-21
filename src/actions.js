@@ -196,6 +196,14 @@ const { Actions, Constants } = EasyActions({
     return { type, error, list, count };
   },
 
+  GET_HOMEWORKS_ACHIEVEDATA(type) {
+    return { type };
+  },
+
+  GET_HOMEWORKS_ACHIEVEDATA_RESULT(type, error, list) {
+    return { type, error, list };
+  },
+
   LIKE_HOMEWORK(type, id) {
     return { type, id };
   },

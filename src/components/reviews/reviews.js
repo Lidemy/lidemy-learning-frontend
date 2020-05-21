@@ -9,7 +9,7 @@ const { Title } = Typography;
 const { TabPane } = Tabs;
 
 const Reviews = () => {
-  const [userId, setUserId] = useState(null);
+  const [userId] = useState(null);
   const initParams = {
     sort: "id",
     order: "ASC",

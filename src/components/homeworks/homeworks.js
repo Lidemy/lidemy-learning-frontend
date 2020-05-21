@@ -93,20 +93,11 @@ const Homeworks = () => {
       sort: sorter.field,
       order: sorter.order === "descend" ? "DESC" : "ASC",
       page: pagination.current,
-      ...(filters.isLike &&
-        filters.isLike.length > 0 && { like: JSON.stringify(filters.isLike) }),
-      ...(filters.isAchieve &&
-        filters.isAchieve.length > 0 && {
-          achieve: JSON.stringify(filters.isAchieve)
-        }),
-      ...(filters.week &&
-        filters.week.length > 0 && { week: JSON.stringify(filters.week) }),
-      ...(filters.TAId &&
-        filters.TAId.length > 0 && { ta: JSON.stringify(filters.TAId) }),
-      ...(filters.UserId &&
-        filters.UserId.length > 0 && {
-          student: JSON.stringify(filters.UserId)
-        })
+      like: filters.isLike,
+      achieve: filters.isAchieve,
+      week: filters.week,
+      ta: filters.TAId,
+      student: filters.UserId
     });
   };
 
