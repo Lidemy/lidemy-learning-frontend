@@ -2,12 +2,14 @@ import { ActionTypes } from "../actions";
 
 const defaultState = {
   homeworks: [],
+  homeworksAchieveData: [],
+  counts: 0,
   isLoadingGetHomeworks: false,
-  isLoadingGetTAHomeworks: false,
   isLoadingCreateHomework: false,
   isLoadingUpdateHomework: false,
+  isLoadingGetHomeworksAchieveData: false,
   getHomeworksError: null,
-  getTAHomeworksError: null,
+  getHomeworksAchieveDataError: null,
   createHomeworkError: null,
   homeworkUpdateError: null
 };
@@ -40,22 +42,23 @@ function homeworkReducer(state = defaultState, action) {
         ...state,
         isLoadingGetHomeworks: false,
         getHomeworksError: action.error,
-        homeworks: action.list
+        homeworks: action.list,
+        count: action.count
       };
 
-    case ActionTypes.GET_TA_HOMEWORKS:
+    case ActionTypes.GET_HOMEWORKS_ACHIEVEDATA:
       return {
         ...state,
-        isLoadingGetTAHomeworks: true,
-        getTAHomeworksError: null
+        isLoadingGetHomeworksAchieveData: true,
+        getHomeworksAchieveDataError: null
       };
 
-    case ActionTypes.GET_TA_HOMEWORKS_RESULT:
+    case ActionTypes.GET_HOMEWORKS_ACHIEVEDATA_RESULT:
       return {
         ...state,
-        isLoadingGetTAHomeworks: false,
-        getTAHomeworksError: action.error,
-        homeworks: action.list
+        isLoadingGetHomeworksAchieveData: false,
+        getHomeworksAchieveDataError: action.error,
+        homeworksAchieveData: action.list
       };
 
     case ActionTypes.LIKE_HOMEWORK:

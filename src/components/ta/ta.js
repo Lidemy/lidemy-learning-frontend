@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Table, Typography, Avatar } from "antd";
 import { useSelector, useDispatch } from "react-redux";
 import { Actions } from "../../actions";
+import Dashboard from "./dashboard";
 
 const { Title } = Typography;
 
@@ -60,16 +61,21 @@ const columns = [
 
 const TA = () => {
   const [userId] = useState(null);
-  const { TAList } = useSelector(state => ({
+  const { TAList, homeworksAchieveData } = useSelector(state => ({
     ...state.user,
+    ...state.homework,
     ...state.auth
   }));
   const dispatch = useDispatch();
 
   const getTAs = () => dispatch(Actions.GET_TA_LIST());
+  const getHomeworksAchieveData = () =>
+    dispatch(Actions.GET_HOMEWORKS_ACHIEVEDATA());
+
   useEffect(
     () => {
       getTAs();
+      getHomeworksAchieveData();
     },
     [userId]
   );
@@ -77,6 +83,9 @@ const TA = () => {
   return (
     <div>
       <Title level={3}>助教列表</Title>
+      <div class="w-100 overflow-x-scroll">
+        <Dashboard data={homeworksAchieveData} />
+      </div>
       <Table
         columns={columns}
         dataSource={TAList}

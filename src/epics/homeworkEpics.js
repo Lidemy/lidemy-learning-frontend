@@ -9,20 +9,24 @@ export const getHomeworks = action$ =>
   action$.pipe(
     ofType(ActionTypes.GET_HOMEWORKS),
     switchMap(action =>
-      from(api.getHomeworks(action.id)).pipe(
-        map(res => Actions.GET_HOMEWORKS_RESULT(null, res.data)),
+      from(api.getHomeworks(action.payload)).pipe(
+        map(res =>
+          Actions.GET_HOMEWORKS_RESULT(null, res.data.rows, res.data.count)
+        ),
         catchError(err => of(Actions.GET_HOMEWORKS_RESULT(err.message)))
       )
     )
   );
 
-export const getTAHomeworks = action$ =>
+export const getHomeworksAchieveData = action$ =>
   action$.pipe(
-    ofType(ActionTypes.GET_TA_HOMEWORKS),
-    switchMap(action =>
-      from(api.getTAHomeworks(action.id)).pipe(
-        map(res => Actions.GET_TA_HOMEWORKS_RESULT(null, res.data)),
-        catchError(err => of(Actions.GET_TA_HOMEWORKS_RESULT(err.message)))
+    ofType(ActionTypes.GET_HOMEWORKS_ACHIEVEDATA),
+    switchMap(() =>
+      from(api.getHomeworksAchieveData()).pipe(
+        map(res => Actions.GET_HOMEWORKS_ACHIEVEDATA_RESULT(null, res.data)),
+        catchError(err =>
+          of(Actions.GET_HOMEWORKS_ACHIEVEDATA_RESULT(err.message))
+        )
       )
     )
   );
