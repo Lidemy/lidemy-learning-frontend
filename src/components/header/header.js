@@ -71,7 +71,7 @@ class Header extends Component {
     const { modalOpen } = this.state;
     const { user, isLogin, isLoadingUpdateUser } = this.props;
     const isMobile = window.innerWidth <= 1194;
-    const isTA = user && (user.isTA || user.isAdmin);
+    const isTA = user && user.isTA;
     const isAdmin = user && user.isAdmin;
 
     return (
