@@ -6,7 +6,9 @@ const defaultState = {
   isLogin: false,
   user: null,
   isLoadingRegister: false,
+  isLoadingCreateInvite: false,
   registerResult: null,
+  inviteResult: null,
   isLoadingGetUser: false
 };
 
@@ -50,6 +52,20 @@ function authReducer(state = defaultState, action) {
         ...state,
         isLoadingRegister: false,
         registerResult: action.result
+      };
+
+    case ActionTypes.CREATE_INVITE:
+      return {
+        ...state,
+        isLoadingCreateInvite: true,
+        inviteResult: null
+      };
+
+    case ActionTypes.CREATE_INVITE_RESULT:
+      return {
+        ...state,
+        isLoadingCreateInvite: false,
+        inviteResult: action.token
       };
 
     case ActionTypes.GET_CURRENT_USER:

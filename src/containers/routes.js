@@ -13,7 +13,12 @@ import TA from "../components/ta";
 
 const Routes = ({ user }) => {
   if (!user) {
-    return <Guest />;
+    return (
+      <Switch>
+        <Route exact path="/" component={Guest} />
+        <Route path="/invite/:token" component={Guest} />
+      </Switch>
+    );
   }
   return (
     <Switch>

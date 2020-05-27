@@ -1,70 +1,67 @@
 import React, { Component } from "react";
-import { Input, Button, message } from "antd";
+import { withRouter } from "react-router-dom";
+import { message } from "antd";
 import Loading from "../loading";
+import jwtDecode from "jwt-decode";
 
 class Guest extends Component {
-  state = {
-    text: ""
-  };
-
-  onChange = e => {
-    this.setState({
-      text: e.target.value
-    });
-  };
-
-  submit = () => {
-    const { text } = this.state;
-    const { register } = this.props;
-    register(text);
-  };
-
   componentDidUpdate(prevProps) {
-    const { isLoadingRegister, registerResult } = this.props;
+    const { isLogin, isLoadingRegister, registerResult, history } = this.props;
     if (
       prevProps.isLoadingRegister !== isLoadingRegister &&
       !isLoadingRegister
     ) {
-      if (registerResult) {
+      if (registerResult === "success") {
         message.success("註冊成功！會在兩秒鐘之後自動跳轉");
         setTimeout(() => {
-          window.location.reload();
+          history.push("/");
         }, 2000);
       } else {
-        message.error("註冊失敗");
+        if (registerResult === "REPEAT_USER") message.error("重複註冊");
+      }
+    }
+
+    if (prevProps.isLogin !== isLogin) {
+      this.varifyInvite();
+    }
+  }
+
+  varifyInvite() {
+    const { isLogin, match, register } = this.props;
+    const isExp = jwtDecode(match.params.token).exp > Date.now() / 1000;
+    if (match.params.token) {
+      if (isExp && isLogin) {
+        register(match.params.token);
+      }
+      if (!isLogin) {
+        message.error("尚未登入");
+      }
+      if (!isExp) {
+        message.error("連結逾期");
       }
     }
   }
 
   render() {
-    const { text } = this.state;
-    const { isLoadingRegister, isLogin, isLoadingGetUser } = this.props;
+    const { isLogin, isLoadingGetUser } = this.props;
     return (
       <div>
         {isLoadingGetUser && <Loading />}
         {!isLogin && (
           <p>
-            請登入，如果你已經登入卻還是看到此訊息，代表你沒有權限，請找 @huli
-            尋求協助
+            請登入，如果你已經使用邀請連結註冊過帳號，登入卻還是看到此訊息，代表你沒有權限，請找
+            @huli 尋求協助
           </p>
         )}
-        {isLogin && <p>請在下方輸入框填入邀請碼以加入系統</p>}
         {isLogin && (
-          <div>
-            <Input value={text} onChange={this.onChange} />
-            <Button
-              className="mt2"
-              disabled={isLoadingRegister}
-              type="primary"
-              onClick={this.submit}
-            >
-              送出
-            </Button>
-          </div>
+          <p>
+            請使用邀請連結加入學習系統，如果已經使用邀請連結還是看到此訊息，請找
+            @huli 尋求協助
+          </p>
         )}
       </div>
     );
   }
 }
 
-export default Guest;
+export default withRouter(Guest);

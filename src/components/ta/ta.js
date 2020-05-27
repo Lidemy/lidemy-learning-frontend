@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react";
-import { Table, Typography, Avatar } from "antd";
+import { Table, Typography, Avatar, Button } from "antd";
 import { useSelector, useDispatch } from "react-redux";
 import { Actions } from "../../actions";
 import Dashboard from "./dashboard";
+import LinkModal from "./linkModal";
 
 const { Title } = Typography;
 
@@ -61,6 +62,7 @@ const columns = [
 
 const TA = () => {
   const [userId] = useState(null);
+  const [visible, setVisible] = useState(false);
   const { TAList, homeworksAchieveData } = useSelector(state => ({
     ...state.user,
     ...state.homework,
@@ -69,8 +71,21 @@ const TA = () => {
   const dispatch = useDispatch();
 
   const getTAs = () => dispatch(Actions.GET_TA_LIST());
+  const createInviteLink = payload => dispatch(Actions.CREATE_INVITE(payload));
   const getHomeworksAchieveData = () =>
     dispatch(Actions.GET_HOMEWORKS_ACHIEVEDATA());
+
+  const handleCreate = payload => {
+    createInviteLink(payload);
+  };
+
+  const closeModal = () => {
+    setVisible(false);
+  };
+
+  const showModal = () => {
+    setVisible(true);
+  };
 
   useEffect(
     () => {
@@ -82,8 +97,16 @@ const TA = () => {
 
   return (
     <div>
+      <LinkModal
+        visible={visible}
+        onCancel={closeModal}
+        onConfirm={handleCreate}
+      />
       <Title level={3}>助教列表</Title>
-      <div class="w-100 overflow-x-scroll">
+      <Button className="mv3" onClick={showModal}>
+        新增邀請連結
+      </Button>
+      <div className="w-100 overflow-x-scroll">
         <Dashboard data={homeworksAchieveData} />
       </div>
       <Table
