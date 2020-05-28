@@ -2,17 +2,16 @@ import React, { Component } from "react";
 import moment from "moment";
 import Markdown from "../common/markdown";
 import {
-  Collapse,
   Comment,
   Tooltip,
-  List,
   Row,
   Col,
   Steps,
   Button,
   Card,
   Popconfirm,
-  message
+  message,
+  Collapse
 } from "antd";
 import Loading from "../loading";
 
@@ -253,12 +252,13 @@ class Home extends Component {
           </Col>
           <Col md={14}>
             <Card title="最新消息" bordered={false}>
-              <List
-                className="comment-list"
-                itemLayout="horizontal"
-                dataSource={newsList}
-                renderItem={item => <News item={item} />}
-              />
+              <Collapse bordered={false} defaultActiveKey={[0]}>
+                {newsList.map((item, idx) => (
+                  <Panel header={item.title} key={idx}>
+                    <News item={item} />
+                  </Panel>
+                ))}
+              </Collapse>
             </Card>
           </Col>
         </Row>
