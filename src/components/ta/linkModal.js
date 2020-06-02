@@ -5,6 +5,15 @@ import jwtDecode from "jwt-decode";
 
 const { Option } = Select;
 
+function isValidJWT(token) {
+  try {
+    let temp = jwtDecode(token);
+    return true;
+  } catch (err) {
+    return false;
+  }
+}
+
 const LinkModal = ({ visible, onCancel, onConfirm }) => {
   const init = {
     semester: 4,
@@ -113,10 +122,10 @@ const LinkModal = ({ visible, onCancel, onConfirm }) => {
         />
       </div>
       <div className="mb2">
-        {text && (
+        {text && isValidJWT(text) && (
           <p>過期時間：{new Date(jwtDecode(text).exp * 1000).toString()}</p>
         )}
-        {link && (
+        {link && isValidJWT(link) && (
           <p>過期時間：{new Date(jwtDecode(link).exp * 1000).toString()}</p>
         )}
       </div>
