@@ -22,12 +22,15 @@ class Guest extends Component {
     }
 
     if (prevProps.isLogin !== isLogin) {
-      this.varifyInvite();
+      this.verifyInvite();
     }
   }
 
-  varifyInvite() {
+  verifyInvite() {
     const { isLogin, match, register } = this.props;
+    if (!match.params || !match.params.token) {
+      return;
+    }
     const isExp = jwtDecode(match.params.token).exp > Date.now() / 1000;
     if (match.params.token) {
       if (isExp && isLogin) {
