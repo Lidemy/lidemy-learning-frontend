@@ -20,11 +20,9 @@ instance.interceptors.request.use(config => {
 });
 
 export const getUser = () => instance.get("/users/me");
-export const register = code =>
-  instance.post("/register", {
-    code
-  });
+export const register = code => instance.get("/invite?token=" + code);
 export const updateUser = (id, params) => instance.put("/users/" + id, params);
+export const createInviteLink = payload => instance.post("/invite", payload);
 
 // ta
 export const getTAs = () => instance.get("/ta");

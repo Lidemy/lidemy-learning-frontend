@@ -59,6 +59,14 @@ const { Actions, Constants } = EasyActions({
     return { type, result };
   },
 
+  CREATE_INVITE(type, payload) {
+    return { type, payload };
+  },
+
+  CREATE_INVITE_RESULT(type, token) {
+    return { type, token };
+  },
+
   // profile
   GET_USER_PROFILE(type, userId) {
     return { type, userId };

@@ -1,6 +1,6 @@
 import { ofType } from "redux-observable";
-import { of, from } from "rxjs";
-import { catchError, map, mergeMap } from "rxjs/operators";
+import { of, from, throwError } from "rxjs";
+import { catchError, map, mergeMap, switchMap } from "rxjs/operators";
 
 import { ActionTypes, Actions } from "../actions";
 import * as api from "../api";
@@ -8,10 +8,22 @@ import * as api from "../api";
 export const registerEpic = action$ =>
   action$.pipe(
     ofType(ActionTypes.REGISTER),
-    mergeMap(action =>
+    switchMap(action =>
       from(api.register(action.code)).pipe(
         map(() => Actions.REGISTER_RESULT("success")),
-        catchError(error => of(Actions.REGISTER_RESULT(null)))
+        catchError(err => throwError(err))
+      )
+    ),
+    catchError(err => of(Actions.REGISTER_RESULT(err.response.data.error)))
+  );
+
+export const createInviteLinkEpic = action$ =>
+  action$.pipe(
+    ofType(ActionTypes.CREATE_INVITE),
+    switchMap(action =>
+      from(api.createInviteLink(action.payload)).pipe(
+        map(res => Actions.CREATE_INVITE_RESULT(res.data.token)),
+        catchError(err => of(Actions.CREATE_INVITE_RESULT(err.message)))
       )
     )
   );
@@ -22,7 +34,7 @@ export const getCurrentUser = action$ =>
     mergeMap(action =>
       from(api.getUser()).pipe(
         map(resp => Actions.SET_USER(resp.data)),
-        catchError(error => of(Actions.GET_USER_FAILED(error)))
+        catchError(err => of(Actions.GET_USER_FAILED(err.message)))
       )
     )
   );
