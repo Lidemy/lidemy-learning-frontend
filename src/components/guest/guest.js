@@ -31,17 +31,13 @@ class Guest extends Component {
     if (!match.params || !match.params.token) {
       return;
     }
-    const isExp = jwtDecode(match.params.token).exp > Date.now() / 1000;
-    if (match.params.token) {
-      if (isExp && isLogin) {
-        register(match.params.token);
-      }
-      if (!isLogin) {
-        message.error("尚未登入");
-      }
-      if (!isExp) {
-        message.error("連結逾期");
-      }
+    const isValid = jwtDecode(match.params.token).exp > Date.now() / 1000;
+    if (isValid && isLogin) {
+      register(match.params.token);
+    } else if (!isLogin) {
+      message.error("尚未登入");
+    } else if (!isValid) {
+      message.error("連結逾期");
     }
   }
 
