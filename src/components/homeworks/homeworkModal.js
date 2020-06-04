@@ -73,7 +73,7 @@ const HomeworkModal = ({ visible, onCancel, onConfirm }) => {
           <Select value={week} onChange={onChange}>
             {[...Array(24).keys()].map(item => (
               <Option key={item} value={item + 1}>
-                week{item + 1}
+                {item + 1}
               </Option>
             ))}
           </Select>
@@ -90,14 +90,14 @@ const HomeworkModal = ({ visible, onCancel, onConfirm }) => {
           value={isCheckHomework}
           onChange={handleInputCheck}
         >
-          確認已經檢查過作業
+          確認已經檢查過作業，有完成需求
         </Checkbox>
         <Checkbox
           name="isCheckReview"
           value={isCheckReview}
           onChange={handleInputCheck}
         >
-          確認已經看過作業提醒
+          確認已經看過當週的自我檢討並修正錯誤
         </Checkbox>
       </div>
     </Modal>
