@@ -44,7 +44,6 @@ class App extends Component {
               huli
             </a>
             <br />
-            Last updated: 2020-05-10 10:30:00
           </Footer>
         </Layout>
       </Router>

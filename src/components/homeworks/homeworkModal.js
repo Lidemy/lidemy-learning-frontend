@@ -70,35 +70,39 @@ const HomeworkModal = ({ visible, onCancel, onConfirm }) => {
       <div className="mb2">
         <label>第幾週</label>
         <div>
-          <Select value={week} onChange={onChange}>
+          <Select value={week} onChange={onChange} style={{ width: "100px" }}>
             {[...Array(24).keys()].map(item => (
               <Option key={item} value={item + 1}>
-                {item + 1}
+                Week {item + 1}
               </Option>
             ))}
           </Select>
         </div>
       </div>
       <div className="mb2">
-        <label>pr 連結</label>
+        <label>PR 連結</label>
         <Input onChange={handleInputChange} name="prUrl" value={prUrl} />
         <div className="red">{errMsg}</div>
       </div>
       <div className="mb2">
-        <Checkbox
-          name="isCheckHomework"
-          value={isCheckHomework}
-          onChange={handleInputCheck}
-        >
-          確認已經檢查過作業，有完成需求
-        </Checkbox>
-        <Checkbox
-          name="isCheckReview"
-          value={isCheckReview}
-          onChange={handleInputCheck}
-        >
-          確認已經看過當週的自我檢討並修正錯誤
-        </Checkbox>
+        <div>
+          <Checkbox
+            name="isCheckHomework"
+            value={isCheckHomework}
+            onChange={handleInputCheck}
+          >
+            確認已經檢查過作業，有完成需求
+          </Checkbox>
+        </div>
+        <div>
+          <Checkbox
+            name="isCheckReview"
+            value={isCheckReview}
+            onChange={handleInputCheck}
+          >
+            確認已經看過當週的自我檢討並修正錯誤
+          </Checkbox>
+        </div>
       </div>
     </Modal>
   );

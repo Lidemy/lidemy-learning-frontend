@@ -20,7 +20,7 @@ import moment from "moment";
 import Loading from "../loading";
 import ReportModal from "./reportModal";
 
-const START_DATE = "2019-04-15";
+const START_DATE = "2020-06-12";
 const pageSize = 10;
 
 class MarkdownView extends React.PureComponent {

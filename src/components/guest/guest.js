@@ -14,7 +14,7 @@ class Guest extends Component {
       if (registerResult === "success") {
         message.success("註冊成功！會在兩秒鐘之後自動跳轉");
         setTimeout(() => {
-          history.push("/");
+          window.location.reload();
         }, 2000);
       } else {
         if (registerResult === "REPEAT_USER") message.error("重複註冊");
