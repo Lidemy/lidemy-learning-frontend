@@ -18,9 +18,7 @@ class Guest extends Component {
         }, 2000);
       }
 
-      setTimeout(() => {
-        // window.location.reload();
-      }, 2000);
+      message.error("註冊失敗QQ");
     }
 
     if (prevProps.isLogin !== isLogin) {

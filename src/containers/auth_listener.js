@@ -17,10 +17,12 @@ class AuthListener extends React.Component {
     // we can use this to check if user is login or not
     firebaseApp.auth().onAuthStateChanged(user => {
       setCheckLoginStatus(user ? "SUCCESS" : "FAILURE");
-      setUserAuthenticated(user ? true : false);
-      if (user) {
+      if (!user) {
+        setUserAuthenticated(false);
+      } else {
         user.getIdToken(true).then(token => {
           storage.setToken(token);
+          setUserAuthenticated(true);
           getCurrentUser();
         });
       }
