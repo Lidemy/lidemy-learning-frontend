@@ -7,12 +7,14 @@ const columns = [
   {
     title: "ID",
     dataIndex: "id",
+    width: 80,
     render: (id, row) => id,
     sorter: true,
     defaultSortOrder: "descend"
   },
   {
     title: "週次",
+    width: 100,
     dataIndex: "week",
     render: (week, row) => (
       <a href={row.prUrl} target="_blank" rel="noopener noreferrer">

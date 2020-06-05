@@ -123,7 +123,7 @@ const Homeworks = () => {
           <Table
             columns={hwColumns}
             dataSource={homeworks}
-            scroll={{ x: 1280, y: 1080 }}
+            scroll={{ x: "100%", y: 1080 }}
             rowKey="id"
             onChange={handleTableChange}
             pagination={{
@@ -136,7 +136,7 @@ const Homeworks = () => {
           <Table
             columns={hwColumns}
             dataSource={homeworks}
-            scroll={{ x: 1280, y: 1080 }}
+            scroll={{ x: "100%", y: 1080 }}
             rowKey="id"
             onChange={handleTableChange}
             pagination={{

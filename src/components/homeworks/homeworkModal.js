@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Modal, Input, Select, Checkbox } from "antd";
 
 const { Option } = Select;
@@ -13,6 +13,12 @@ const HomeworkModal = ({ visible, onCancel, onConfirm }) => {
   const [eachEntry, setEachEntry] = useState(init);
   const [errMsg, setErr] = useState("");
   const { week, prUrl, isCheckHomework, isCheckReview } = eachEntry;
+
+  useEffect(() => {
+    setEachEntry({
+      ...init
+    });
+  }, visible);
 
   const handleConfirm = () => {
     if (prUrl && prUrl.match("github") && isCheckHomework && isCheckReview) {
@@ -88,7 +94,7 @@ const HomeworkModal = ({ visible, onCancel, onConfirm }) => {
         <div>
           <Checkbox
             name="isCheckHomework"
-            value={isCheckHomework}
+            checked={isCheckHomework}
             onChange={handleInputCheck}
           >
             確認已經檢查過作業，有完成需求
@@ -97,7 +103,7 @@ const HomeworkModal = ({ visible, onCancel, onConfirm }) => {
         <div>
           <Checkbox
             name="isCheckReview"
-            value={isCheckReview}
+            checked={isCheckReview}
             onChange={handleInputCheck}
           >
             確認已經看過當週的自我檢討並修正錯誤

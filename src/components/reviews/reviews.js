@@ -148,7 +148,7 @@ const Reviews = () => {
           <Table
             columns={allColumns}
             dataSource={homeworks}
-            scroll={{ x: 1280, y: 1080 }}
+            scroll={{ x: "100%", y: 1080 }}
             rowKey="id"
             onChange={handleTableChange}
             pagination={{
@@ -161,7 +161,7 @@ const Reviews = () => {
           <Table
             columns={myColumns}
             dataSource={homeworks}
-            scroll={{ x: 1280, y: 1080 }}
+            scroll={{ x: "100%", y: 1080 }}
             rowKey="id"
             onChange={handleTableChange}
             pagination={{
