@@ -13,10 +13,13 @@ class Guest extends Component {
     ) {
       if (registerResult === "success") {
         message.success("註冊成功！會在兩秒鐘之後自動跳轉");
+        return setTimeout(() => {
+          window.location = "/";
+        }, 2000);
       }
 
       setTimeout(() => {
-        window.location = "/";
+        // window.location.reload();
       }, 2000);
     }
 
