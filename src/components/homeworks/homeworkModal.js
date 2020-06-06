@@ -21,14 +21,20 @@ const HomeworkModal = ({ visible, onCancel, onConfirm }) => {
   }, visible);
 
   const handleConfirm = () => {
-    if (prUrl && prUrl.match("github") && isCheckHomework && isCheckReview) {
+    if (
+      prUrl &&
+      prUrl.indexOf("github") >= 0 &&
+      prUrl.indexOf("pull") >= 0 &&
+      isCheckHomework &&
+      isCheckReview
+    ) {
       onConfirm({
         ...eachEntry
       });
       handleCancel();
       onCancel();
     } else {
-      setErr("pr 連結不得為空或非 github pr 連結");
+      setErr("PR 連結不得為空或非 GitHub PR 連結");
       if (!isCheckHomework || !isCheckReview) {
         setErr("請確認是否檢查過作業須知");
       }

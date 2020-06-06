@@ -20,7 +20,7 @@ const Reviews = () => {
   const {
     homeworks,
     count,
-    isLoadingGetTAHomeworks,
+    isLoadingGetHomeworks,
     isLoadingUpdateHomework,
     user
   } = useSelector(state => ({
@@ -144,7 +144,7 @@ const Reviews = () => {
       </div>
       <Tabs defaultActiveKey="all" onChange={changeTab}>
         <TabPane tab="所有批閱" key="all">
-          {isLoadingGetTAHomeworks && <Loading />}
+          {isLoadingGetHomeworks && <Loading />}
           <Table
             columns={allColumns}
             dataSource={homeworks}
@@ -157,7 +157,7 @@ const Reviews = () => {
           />
         </TabPane>
         <TabPane tab="我的批閱" key="me">
-          {isLoadingGetTAHomeworks && <Loading />}
+          {isLoadingGetHomeworks && <Loading />}
           <Table
             columns={myColumns}
             dataSource={homeworks}

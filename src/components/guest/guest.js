@@ -6,7 +6,7 @@ import jwtDecode from "jwt-decode";
 
 class Guest extends Component {
   componentDidUpdate(prevProps) {
-    const { isLogin, isLoadingRegister, registerResult, history } = this.props;
+    const { isLogin, isLoadingRegister, registerResult } = this.props;
     if (
       prevProps.isLoadingRegister !== isLoadingRegister &&
       !isLoadingRegister

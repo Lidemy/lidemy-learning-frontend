@@ -13,7 +13,7 @@ const { TabPane } = Tabs;
 const Homeworks = () => {
   const initParams = {
     sort: "id",
-    order: "ASC",
+    order: "DESC",
     page: 1
   };
   const [userId, setUserId] = useState(null);
