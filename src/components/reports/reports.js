@@ -22,7 +22,7 @@ import Loading from "../loading";
 
 class Title extends React.PureComponent {
   render() {
-    const { isRead, item } = this.props;
+    const { isRead, item, showOneColumn } = this.props;
     return (
       <div>
         <div
@@ -73,7 +73,9 @@ class Title extends React.PureComponent {
                 }}
               >
                 {item.User.nickname}
-                {item.User.slackId && `(@${item.User.slackId})`}
+                {showOneColumn &&
+                  item.User.slackId &&
+                  `(@${item.User.slackId})`}
               </span>
               <div className="flex items-center flex-start relative">
                 {item.User.isTA && <Tag color="green">助教</Tag>}
@@ -98,9 +100,13 @@ class Title extends React.PureComponent {
 
 class Report extends React.PureComponent {
   render() {
-    const { item, height, isRead } = this.props;
+    const { item, height, isRead, showOneColumn } = this.props;
     return (
-      <Card title={<Title item={item} isRead={isRead} />}>
+      <Card
+        title={
+          <Title item={item} isRead={isRead} showOneColumn={showOneColumn} />
+        }
+      >
         <div style={{ height, overflow: "auto", whiteSpace: "pre-wrap" }}>
           <Markdown source={item.content} />
         </div>
@@ -318,6 +324,7 @@ class Reports extends Component {
             >
               <Report
                 item={item}
+                showOneColumn={showOneColumn}
                 height={showOneColumn ? "auto" : "300px"}
                 isRead={lastReadId >= item.id}
               />
