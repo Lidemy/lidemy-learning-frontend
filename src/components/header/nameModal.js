@@ -11,7 +11,8 @@ const NameModal = ({ visible, instance, onCancel, onConfirm }) => {
 
   const handleConfirm = () => {
     onConfirm({
-      ...eachEntry
+      ...eachEntry,
+      nickname: nickname === "" ? instance.nickname : nickname
     });
     onCancel();
   };
@@ -56,11 +57,11 @@ const NameModal = ({ visible, instance, onCancel, onConfirm }) => {
           {isStudent && <Tag color="blue">第 {semester} 期學生</Tag>}
         </div>
       </div>
-      <div class="mb2">
+      <div className="mb2">
         <label>更改暱稱：</label>
         <Input onChange={handleInputChange} name="nickname" value={nickname} />
       </div>
-      <div class="mb2">
+      <div className="mb2">
         <label>更改 Slack Id:</label>
         <Input onChange={handleInputChange} name="slackId" value={slackId} />
       </div>
