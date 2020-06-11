@@ -123,11 +123,19 @@ class Header extends Component {
               <Link to="/admin/ta">助教列表</Link>
             </Menu.Item>
           )}
+          {isMobile && isLogin && user && user.nickname && (
+            <Menu.Item key="edit">
+              <div onClick={this.openModal}>更改資料</div>
+            </Menu.Item>
+          )}
           {isMobile && user && isLogin && (
             <Menu.Item key="logout">
-              <Button type="primary" onClick={this.handleLogout}>
-                登出
-              </Button>
+              <div onClick={this.handleLogout}>登出</div>
+            </Menu.Item>
+          )}
+          {isMobile && !isLogin && (
+            <Menu.Item key="login">
+              <div onClick={this.handleLogin}>登入</div>
             </Menu.Item>
           )}
         </Menu>
@@ -153,13 +161,11 @@ class Header extends Component {
               <div>{user.nickname || ""}</div>
             </div>
           )}
-
           {!isLogin && (
             <Button type="primary" onClick={this.handleLogin}>
               登入
             </Button>
           )}
-
           {!isMobile && isLogin && user && user.nickname && (
             <Button className="mr2" onClick={this.openModal}>
               更改資料
