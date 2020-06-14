@@ -58,6 +58,7 @@ const columns = [
     title: "值得參考",
     dataIndex: "isLike",
     align: "center",
+    width: 120,
     filters: [
       {
         text: "值得參考",
@@ -71,6 +72,7 @@ const columns = [
     title: "已批改",
     dataIndex: "isAchieve",
     align: "center",
+    width: 120,
     filters: [
       {
         text: "已批改",
@@ -87,6 +89,7 @@ const columns = [
   {
     title: "建立時間",
     dataIndex: "createdAt",
+    width: 120,
     render: createdAt => <div>{moment(createdAt).format("YYYY-MM-DD")}</div>,
     sorter: true,
     defaultSortOrder: "descend"

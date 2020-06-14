@@ -108,6 +108,8 @@ const Homeworks = () => {
     [userId, params, isLoadingCreateHomework]
   );
 
+  const tableWidth = window.innerWidth <= 1000 ? 1000 : "100%";
+
   return (
     <div>
       <HomeworkModal
@@ -123,7 +125,7 @@ const Homeworks = () => {
           <Table
             columns={hwColumns}
             dataSource={homeworks}
-            scroll={{ x: "100%", y: 1080 }}
+            scroll={{ x: tableWidth, y: 1080 }}
             rowKey="id"
             onChange={handleTableChange}
             pagination={{
@@ -136,7 +138,7 @@ const Homeworks = () => {
           <Table
             columns={hwColumns}
             dataSource={homeworks}
-            scroll={{ x: "100%", y: 1080 }}
+            scroll={{ x: tableWidth, y: 1080 }}
             rowKey="id"
             onChange={handleTableChange}
             pagination={{
