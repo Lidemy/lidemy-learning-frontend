@@ -36,14 +36,15 @@ const Homeworks = () => {
   const changeTab = key => {
     switch (key) {
       case "all":
-        setUserId(0);
+        setParams({
+          ...initParams
+        });
         break;
       case "me":
         setParams({
           ...initParams,
-          UserId: userId
+          UserId: user.id
         });
-        setUserId(user.id);
         break;
       default:
         setUserId(0);
@@ -90,6 +91,7 @@ const Homeworks = () => {
 
   const handleTableChange = (pagination, filters, sorter) => {
     setParams({
+      ...params,
       sort: sorter.field,
       order: sorter.order === "descend" ? "DESC" : "ASC",
       page: pagination.current,

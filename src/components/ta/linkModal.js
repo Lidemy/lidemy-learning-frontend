@@ -7,7 +7,7 @@ const { Option } = Select;
 
 function isValidJWT(token) {
   try {
-    let temp = jwtDecode(token);
+    jwtDecode(token);
     return true;
   } catch (err) {
     return false;

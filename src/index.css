@@ -46,3 +46,27 @@ code {
 .ant-tabs-content {
   white-space: pre-wrap;
 }
+
+.grid-container {
+  display: grid;
+  justify-content: center;
+  width: 100%;
+  grid-gap: 0.25em;
+  grid-template-columns: repeat(auto-fit, minmax(33%, 1fr));
+}
+
+.grid-fill {
+  grid-template-columns: 1fr;
+}
+
+@media screen and (max-width: 1025px) {
+  .grid-container {
+    grid-template-columns: repeat(auto-fit, minmax(45%, 1fr));
+  }
+}
+
+@media screen and (max-width: 416px) {
+  .grid-container {
+    grid-template-columns: repeat(auto-fit, minmax(100%, 1fr));
+  }
+}
