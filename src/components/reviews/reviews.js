@@ -62,9 +62,9 @@ const Reviews = () => {
       title: "動作",
       render: row => (
         <span>
-          <a onClick={onLikeHomework} data-id={row.id}>
+          <div className="pointer blue" onClick={onLikeHomework} data-id={row.id}>
             {row.isLike ? "取消給讚" : "給讚"}
-          </a>
+          </div>
         </span>
       )
     }
@@ -77,12 +77,12 @@ const Reviews = () => {
       render: row => {
         return (
           <span>
-            <a onClick={onAchieveHomework} className="mr3" data-id={row.id}>
+            <div onClick={onAchieveHomework} className="pointer blue mr3" data-id={row.id}>
               {row.isAchieve ? "取消批改" : "完成批改"}
-            </a>
-            <a onClick={onLikeHomework} data-id={row.id}>
+            </div>
+            <div onClick={onLikeHomework} className="pointer blue" data-id={row.id}>
               {row.isLike ? "取消給讚" : "給讚"}
-            </a>
+            </div>
           </span>
         );
       }
