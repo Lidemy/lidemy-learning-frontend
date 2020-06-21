@@ -312,16 +312,16 @@ class Reports extends Component {
             checked={showOneColumn}
             onChange={this.onCheckboxChange}
           >
-            一欄式排版（未勾選則顯示三欄式排版）
+            一欄式排版（未勾選則顯示多欄式排版）
           </Checkbox>
         </div>
-        <Row gutter={16}>
+        <div
+          className={
+            showOneColumn ? "grid-container grid-fill" : "grid-container"
+          }
+        >
           {reportList.map(item => (
-            <Col
-              md={showOneColumn ? 24 : 8}
-              key={item.id}
-              style={{ marginTop: "10px" }}
-            >
+            <Col key={item.id} style={{ marginTop: "10px" }}>
               <Report
                 item={item}
                 showOneColumn={showOneColumn}
@@ -330,7 +330,7 @@ class Reports extends Component {
               />
             </Col>
           ))}
-        </Row>
+        </div>
         <div className="mt2">
           <Button onClick={this.handleLoadMore} type="primary" block>
             載入更多
