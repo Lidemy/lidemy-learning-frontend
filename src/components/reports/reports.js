@@ -219,6 +219,13 @@ class Reports extends Component {
     });
   };
 
+  appendText = value => {
+    const { text } = this.state;
+    this.setState({
+      text: text + value
+    })
+  }
+
   onSubmit = () => {
     const { createReport } = this.props;
     const { text } = this.state;
@@ -250,6 +257,7 @@ class Reports extends Component {
               <Editor
                 showButton
                 onChange={this.onTextChange}
+                onAdd={this.appendText}
                 value={text}
                 onSubmit={this.onSubmit}
               />

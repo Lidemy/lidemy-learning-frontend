@@ -3,6 +3,7 @@ const tempReport = "temp-report";
 const showAllReport = "show-all-report";
 const showOneColumn = "show-one-column";
 const lastReadId = "last-read-id";
+const templateKey = "report-template";
 
 const isLocalStorageAvailable = () => {
   try {
@@ -16,6 +17,19 @@ const isLocalStorageAvailable = () => {
 
 const storage = {
   isAuthenticated: () => storage.get(tokenName) !== null,
+
+  setTemplates: (templates = []) => {
+    storage.set(templateKey, JSON.stringify(templates));
+  },
+
+  getTemplates: () => {
+    const content = storage.get(templateKey) || [];
+    try {
+      return JSON.parse(content);
+    } catch {
+      return [];
+    }
+  },
 
   setLastReadId: id => {
     storage.set(lastReadId, id);

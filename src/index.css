@@ -47,6 +47,11 @@ code {
   white-space: pre-wrap;
 }
 
+.ant-option {
+  display: flex;
+  justify-content: space-between;
+}
+
 .grid-container {
   display: grid;
   justify-content: center;
