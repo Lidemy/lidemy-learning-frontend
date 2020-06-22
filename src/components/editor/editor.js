@@ -1,62 +1,64 @@
 import React, { useState, useEffect } from "react";
-import { Input, Tabs, Button, Select } from "antd";
+import { Input, Tabs, Button, Select, Modal, message } from "antd";
 import Markdown from "../common/markdown";
-import BadgeModal from "./badgeModal";
+import TemplateModal from "./templateModal";
+import storage from "../../utils/storage";
 
 const { Option } = Select;
-
+const { confirm } = Modal;
 const { TextArea } = Input;
 const TabPane = Tabs.TabPane;
 
-const Editor = ({ rows, showButton, onChange, onAdd, value, onSubmit }) => {   
-  const [badgeList, setBadgeList] = useState([]);
-  const [visible, setVisible] = useState(false);
-  const [select, setSelect] = useState("加入標籤");
+const Editor = ({ rows, showButton, onChange, onAdd, value, onSubmit }) => {
+  const [templates, setTemplates] = useState(storage.getTemplates());
+  const [showTemplateModal, setShowTemplateModal] = useState(false);
 
-  const getBadge = () => JSON.parse(localStorage.getItem('badge'));
-
-  const openModal = () => {
-    setVisible(true);
-  }
-
-  const handleChange = (badge) => {
-    onAdd(badge);
-  }
-
-  const closeModal = () => {
-    setVisible(false);
+  const handleChange = id => {
+    onAdd(templates.find(item => item.id === Number(id)).content);
   };
 
-  const deleteBadge = (evt) => {
-    evt.stopPropagation();
-    const deleteList = badgeList.filter(item => item.name !== evt.target.value);
-    localStorage.removeItem('badge');
-    localStorage.setItem('badge', JSON.stringify(deleteList));
-    setBadgeList(deleteList);
-    setSelect("加入標籤");
-  }
+  const deleteTemplate = (e, id) => {
+    e.stopPropagation();
+    confirm({
+      title: "確定要刪除嗎？",
+      onOk: () => {
+        setTemplates(templates.filter(item => item.id !== id));
+      }
+    });
+  };
 
-  const handleSetBadge = data => {
-    const newList = badgeList ? [...badgeList, data] : [data];
-    localStorage.setItem('badge', JSON.stringify(newList));
-    setBadgeList(newList);
+  const handleAddTemplate = data => {
+    if (!data.name || !data.content) return;
+    if (templates.length >= 7) {
+      return message.error(
+        "已達模板數量上限，請加值以解鎖更多功能（開玩笑的）"
+      );
+    }
+    const lastId =
+      templates.length === 0 ? 0 : templates[templates.length - 1].id;
+    setTemplates([
+      ...templates,
+      {
+        ...data,
+        id: lastId + 1
+      }
+    ]);
   };
 
   useEffect(
     () => {
-      const badges = getBadge();
-      setBadgeList(badges);
+      storage.setTemplates(templates);
     },
-    [rows]
+    [templates]
   );
 
   return (
     <div>
-      {<BadgeModal 
-        visible={visible}
-        onCancel={closeModal}
-        onConfirm={handleSetBadge} 
-      />}
+      <TemplateModal
+        visible={showTemplateModal}
+        onCancel={() => setShowTemplateModal(false)}
+        onConfirm={handleAddTemplate}
+      />
       <Tabs defaultActiveKey="1" animated={false}>
         <TabPane tab="Write" key="1">
           <div>
@@ -64,28 +66,32 @@ const Editor = ({ rows, showButton, onChange, onAdd, value, onSubmit }) => {
             {showButton && (
               <div className="flex justify-between flex-wrap mt1">
                 <div>
-                  <Select value={select} style={{ width: 120, marginRight: '15px' }} onChange={handleChange}>
-                    { badgeList && badgeList.map((item, idx) => 
-                      <Option key={idx} value={item.link}>
-                        <Button 
-                          className="mr1"
-                          type="danger" 
-                          shape="circle" 
-                          icon="minus"
-                          size="small" 
-                          value={item.name}
-                          onClick={deleteBadge} 
-                        />
-                        {item.name} 
-                      </Option>
-                    )}
+                  <Select
+                    value={undefined}
+                    placeholder="選擇模板"
+                    style={{ width: 120, marginRight: "15px" }}
+                    onChange={handleChange}
+                  >
+                    {templates &&
+                      templates.map(item => (
+                        <Option key={item.id} value={item.id}>
+                          <Button
+                            className="mr1"
+                            shape="circle"
+                            icon="delete"
+                            size="small"
+                            onClick={e => deleteTemplate(e, item.id)}
+                          />
+                          {item.name}
+                        </Option>
+                      ))}
                   </Select>
-                  <Button 
-                    type="primary" 
-                    shape="circle" 
+                  <Button
+                    type="primary"
+                    shape="circle"
                     icon="plus"
-                    size="small" 
-                    onClick={openModal} 
+                    size="small"
+                    onClick={() => setShowTemplateModal(true)}
                   />
                 </div>
                 <Button
@@ -105,6 +111,6 @@ const Editor = ({ rows, showButton, onChange, onAdd, value, onSubmit }) => {
       </Tabs>
     </div>
   );
-}
+};
 
 export default Editor;
