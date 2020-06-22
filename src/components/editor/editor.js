@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Input, Tabs, Button, Select, Modal } from "antd";
+import { Input, Tabs, Button, Select, Modal, message } from "antd";
 import Markdown from "../common/markdown";
 import TemplateModal from "./templateModal";
 import storage from "../../utils/storage";
@@ -30,6 +30,11 @@ const Editor = ({ rows, showButton, onChange, onAdd, value, onSubmit }) => {
 
   const handleAddTemplate = data => {
     if (!data.name || !data.content) return;
+    if (templates.length >= 7) {
+      return message.error(
+        "已達模板數量上限，請加值以解鎖更多功能（開玩笑的）"
+      );
+    }
     const lastId =
       templates.length === 0 ? 0 : templates[templates.length - 1].id;
     setTemplates([
