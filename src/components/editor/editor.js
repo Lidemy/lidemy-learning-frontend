@@ -12,7 +12,6 @@ const TabPane = Tabs.TabPane;
 const Editor = ({ rows, showButton, onChange, onAdd, value, onSubmit }) => {
   const [templates, setTemplates] = useState(storage.getTemplates());
   const [showTemplateModal, setShowTemplateModal] = useState(false);
-  const [templateId] = useState();
 
   const handleChange = id => {
     onAdd(templates.find(item => item.id === Number(id)).content);
@@ -68,8 +67,8 @@ const Editor = ({ rows, showButton, onChange, onAdd, value, onSubmit }) => {
               <div className="flex justify-between flex-wrap mt1">
                 <div>
                   <Select
-                    value={templateId}
-                    placeholder="請新增模板"
+                    value={undefined}
+                    placeholder="選擇模板"
                     style={{ width: 120, marginRight: "15px" }}
                     onChange={handleChange}
                   >
