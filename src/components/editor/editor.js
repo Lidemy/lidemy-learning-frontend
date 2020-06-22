@@ -74,15 +74,14 @@ const Editor = ({ rows, showButton, onChange, onAdd, value, onSubmit }) => {
                   >
                     {templates &&
                       templates.map(item => (
-                        <Option key={item.id} value={item.id}>
+                        <Option className="ant-option" key={item.id} value={item.id}>
+                          <span>{item.name}</span>
                           <Button
-                            className="mr1"
-                            shape="circle"
+                            type="link"
                             icon="delete"
                             size="small"
                             onClick={e => deleteTemplate(e, item.id)}
                           />
-                          {item.name}
                         </Option>
                       ))}
                   </Select>
