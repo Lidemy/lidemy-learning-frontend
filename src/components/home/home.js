@@ -187,29 +187,24 @@ class Home extends Component {
         {isLoadingUpdateProgress && <Loading />}
         <Row>
           <Col span={24}>
-            <Collapse>
-              <Panel header="學習系統簡介" key="1">
-                <p className="f5">
-                  Hello，歡迎來到 Lidemy 簡易學習系統{" "}
-                  <span role="img" aria-label="tada">
-                    🎉
-                  </span>{" "}
-                  <br />
-                  <br />
-                  你可以在這個系統繳交每日進度報告以及回報課程進度，在進度報告頁面能夠看到與你進度相似的同學
-                  <br />
-                  若是你剛好發現他卡關的地方你之前也卡過，不妨主動找他聊聊{" "}
-                  <span role="img" aria-label="smile">
-                    😊
-                  </span>
-                  <br /> <br />
-                  而課程的主要溝通管道還是
-                  Slack，有任何近況都會先在那邊報告，這邊的最新消息則會在一陣子之後才更新
-                  <br />
-                  要問問題的話請到 Spectrum，那邊的訊息記錄會永久保存著
-                  <br /> <br />
-                  Happy Learing, Happy Coding!
-                </p>
+            <Collapse defaultActiveKey={["1"]}>
+              <Panel header="系統介紹" key="1">
+                <Markdown
+                  source={`
+Hello，歡迎來到 Lidemy 簡易學習系統 🎉
+
+你可以在這個系統繳交每日進度報告以及回報課程進度，在進度報告頁面能夠看到與你進度相似的同學  
+若是你剛好發現他卡關的地方你之前也卡過，不妨主動找他聊聊 😊
+
+Happy Learing, Happy Coding!
+
+## 資源整理
+
+1. [第四期課程大綱](https://github.com/Lidemy/mentor-program-4th)
+2. [第四期筆記專區](https://hackmd.io/@huli/r1PtmBep8)
+3. [Lidemy 線上課程網站](https://lidemy.com)
+4. [LIOJ](https://oj.lidemy.com/)`}
+                />
               </Panel>
             </Collapse>
           </Col>
