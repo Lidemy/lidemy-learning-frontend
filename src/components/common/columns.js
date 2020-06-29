@@ -1,7 +1,7 @@
 import React from "react";
 import moment from "moment";
 import { LikeOutlined, CheckOutlined } from "@ant-design/icons";
-import { Avatar } from "antd";
+import { Avatar, Tooltip } from "antd";
 
 const columns = [
   {
@@ -90,7 +90,11 @@ const columns = [
     title: "建立時間",
     dataIndex: "createdAt",
     width: 120,
-    render: createdAt => <div>{moment(createdAt).format("YYYY-MM-DD")}</div>,
+    render: createdAt => (
+      <Tooltip title={moment(createdAt).format("llll")}>
+        <div>{moment(createdAt).format("YYYY-MM-DD")}</div>
+      </Tooltip>
+    ),
     sorter: true,
     defaultSortOrder: "descend"
   }
