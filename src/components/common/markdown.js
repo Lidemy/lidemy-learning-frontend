@@ -5,7 +5,11 @@ import React from "react";
 
 const CodeBlock = ({ language, value }) => {
   return (
-    <SyntaxHighlighter language={language} style={tomorrow} showLineNumbers={true}>
+    <SyntaxHighlighter
+      language={language}
+      style={tomorrow}
+      showLineNumbers={false}
+    >
       {value}
     </SyntaxHighlighter>
   );
