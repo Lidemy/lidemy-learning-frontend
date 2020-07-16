@@ -9,6 +9,9 @@ const CodeBlock = ({ language, value }) => {
       language={language}
       style={tomorrow}
       showLineNumbers={true}
+      customStyle={{
+        maxWidth: "80vw"
+      }}
     >
       {value || ""}
     </SyntaxHighlighter>
