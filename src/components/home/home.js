@@ -204,7 +204,8 @@ Happy Learing, Happy Coding!
 2. [第四期筆記專區](https://hackmd.io/@huli/r1PtmBep8)
 3. [Lidemy 線上課程網站](https://lidemy.com)
 4. [LIOJ](https://oj.lidemy.com/)
-5. [第四期匿名提問箱](https://forms.gle/2RHmLmJGvNpG22Pu8)`}
+5. [第四期匿名提問箱](https://forms.gle/2RHmLmJGvNpG22Pu8)
+6. [第四期繳款表單（每月 12 號繳款，17500 元）](https://forms.gle/rS1b9BNcimnadL7x7)`}
                 />
               </Panel>
             </Collapse>
