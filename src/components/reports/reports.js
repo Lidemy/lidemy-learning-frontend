@@ -340,7 +340,12 @@ class Reports extends Component {
           ))}
         </div>
         <div className="mt2">
-          <Button onClick={this.handleLoadMore} type="primary" block>
+          <Button
+            onClick={this.handleLoadMore}
+            type="primary"
+            block
+            style={{ overflowAnchor: "none" }}
+          >
             載入更多
           </Button>
         </div>
