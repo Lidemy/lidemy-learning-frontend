@@ -230,7 +230,32 @@ const { Actions, Constants } = EasyActions({
 
   CLEAR_HOMEWORKS(type) {
     return { type };
-  }
+  },
+
+  // note
+  GET_NOTE_LIST(type, payload) {
+    return { type, payload };
+  },
+
+  GET_NOTE_LIST_RESULT(type, error, list) {
+    return { type, error, list };
+  },
+
+  CREATE_NOTE(type, payload) {
+    return { type, payload };
+  },
+
+  CREATE_NOTE_RESULT(type, error) {
+    return { type, error };
+  },
+
+  DELETE_NOTE(type, id) {
+    return { type, id };
+  },
+
+  DELETE_NOTE_RESULT(type, error) {
+    return { type, error };
+  },
 });
 
 export { Actions, Constants as ActionTypes };
