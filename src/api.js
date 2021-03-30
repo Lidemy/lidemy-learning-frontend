@@ -31,6 +31,13 @@ export const toggleTA = () => instance.get("/ta/toggle/");
 // progress
 export const progressUp = () => instance.post("/progress/up");
 export const progressDown = () => instance.post("/progress/down");
+export const createUnitPermissions = (payload) =>
+  instance.post(
+    `/permissions${payload.token ? "?token=" + payload.token : ""}`,
+    { week: payload.week }
+  );
+export const getUnitPermissions = (params = {}) =>
+  instance.get("/permissions", { params });
 
 // report
 export const createReport = (values) => instance.post("/reports", values);

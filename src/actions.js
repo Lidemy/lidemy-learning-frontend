@@ -50,6 +50,22 @@ const { Actions, Constants } = EasyActions({
     return { type, error };
   },
 
+  UPDATE_PROGRESS(type, progress, token) {
+    return { type, progress, token };
+  },
+
+  UPDATE_PROGRESS_RESULT(type, error) {
+    return { type, error };
+  },
+
+  GET_PROGRESS(type, userId) {
+    return { type, userId };
+  },
+
+  GET_PROGRESS_RESULT(type, list, error) {
+    return { type, list, error };
+  },
+
   // register
   REGISTER(type, code) {
     return { type, code };
