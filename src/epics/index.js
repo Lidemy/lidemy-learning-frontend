@@ -5,10 +5,11 @@ import * as adminEpics from "./adminEpics";
 import * as userEpics from "./userEpics";
 import * as reportEpics from "./reportEpics";
 import * as homeworkEpics from "./homeworkEpics";
+import * as noteEpics from "./noteEpics";
 
-const combineEpicFunctions = epics => {
+const combineEpicFunctions = (epics) => {
   return epics.reduce((arr, epic) => {
-    return arr.concat(keysIn(epic).map(key => epic[key]));
+    return arr.concat(keysIn(epic).map((key) => epic[key]));
   }, []);
 };
 
@@ -17,7 +18,8 @@ const epics = combineEpicFunctions([
   adminEpics,
   userEpics,
   reportEpics,
-  homeworkEpics
+  homeworkEpics,
+  noteEpics,
 ]);
 
 export const rootEpic = combineEpics(...epics);

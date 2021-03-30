@@ -9,7 +9,7 @@ const AntdHeader = Layout.Header;
 
 class Header extends Component {
   state = {
-    modalOpen: false
+    modalOpen: false,
   };
 
   componentDidUpdate(prevProps) {
@@ -36,6 +36,7 @@ class Header extends Component {
     if (pathname.indexOf("/reviews") === 0) return "reviews";
     if (pathname.indexOf("/admin/ta") === 0) return "ta";
     if (pathname.indexOf("/admin/news") === 0) return "adminNews";
+    if (pathname.indexOf("/course") === 0) return "course";
     return "home";
   };
 
@@ -52,17 +53,17 @@ class Header extends Component {
 
   openModal = () => {
     this.setState({
-      modalOpen: true
+      modalOpen: true,
     });
   };
 
   closeModal = () => {
     this.setState({
-      modalOpen: false
+      modalOpen: false,
     });
   };
 
-  handleUpdate = data => {
+  handleUpdate = (data) => {
     const { user, updateUser } = this.props;
     updateUser(user.id, data);
   };
@@ -93,6 +94,11 @@ class Header extends Component {
           <Menu.Item key="home">
             <Link to="/">首頁</Link>
           </Menu.Item>
+          {user && (
+            <Menu.Item key="course">
+              <Link to="/course">課程總覽</Link>
+            </Menu.Item>
+          )}
           {user && (
             <Menu.Item key="reports">
               <Link to="/reports">進度報告</Link>
@@ -144,7 +150,7 @@ class Header extends Component {
           style={{
             right: "32px",
             top: 0,
-            height: "64px"
+            height: "64px",
           }}
         >
           {user && !isMobile && (
@@ -155,7 +161,7 @@ class Header extends Component {
                 style={{
                   width: "42px",
                   height: "42px",
-                  marginRight: "10px"
+                  marginRight: "10px",
                 }}
               />
               <div>{user.nickname || ""}</div>
