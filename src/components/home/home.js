@@ -1,129 +1,10 @@
 import React, { Component } from "react";
 import moment from "moment";
 import Markdown from "../common/markdown";
-import {
-  Comment,
-  Tooltip,
-  Row,
-  Col,
-  Steps,
-  Button,
-  Card,
-  Popconfirm,
-  message,
-  Collapse
-} from "antd";
+import { Comment, Tooltip, Row, Col, Card, message, Collapse } from "antd";
 import Loading from "../loading";
 
-const Step = Steps.Step;
 const Panel = Collapse.Panel;
-
-const schedules = [
-  {
-    title: "第一週（06/12 ~ 06/21）：暖身週",
-    description: "掌握 Git 與 Command line 操作"
-  },
-  {
-    title: "第二週（06/22 ~ 06/28）：程式基礎（上）",
-    description: "掌握 JavaScript 基礎"
-  },
-  {
-    title: "第三週（06/29 ~ 07/05）：程式基礎（下）",
-    description: "熟悉 JavaScript 程式基礎"
-  },
-  {
-    title: "第四週（07/06 ~ 07/12）：網路基礎",
-    description: "熟悉網路概念與 API"
-  },
-  {
-    title: "第五週（07/13 ~ 07/19）：複習週",
-    description: "複習前幾週所學"
-  },
-  {
-    title: "第六週（07/20 ~ 07/26）：前端基礎（一）",
-    description: "掌握基本 HTML 與 CSS"
-  },
-  {
-    title: "第七週（07/27 ~ 08/02）：前端基礎（二）",
-    description: "在網頁上使用 JavaScript 與事件處理"
-  },
-  {
-    title: "第八週（08/03 ~ 08/09）：前端基礎（三）",
-    description: "用 JavaScript 與後端溝通"
-  },
-  {
-    title: "第九週（08/10 ~ 08/16）：後端基礎（一）",
-    description: "掌握 PHP 與 SQL 基礎用法"
-  },
-  {
-    title: "第十週（08/17 ~ 08/23）：複習週",
-    description: "複習前幾週所學"
-  },
-  {
-    title: "第十一週（08/24 ~ 08/30）：後端基礎（二）",
-    description: "認識資訊安全以及防範方法"
-  },
-  {
-    title: "第十二週（08/31 ~ 09/06）：後端基礎（三）",
-    description: "前後端整合"
-  },
-  {
-    title: "第十三週（09/07 ~ 09/13）：前端基礎（四）",
-    description: "熟悉現代前端工具"
-  },
-  {
-    title: "第十四週（09/14 ~ 09/20）：後端基礎（四）",
-    description: "知道如何部署自己的程式"
-  },
-  {
-    title: "第十五週（09/21 ~ 09/27）：複習週",
-    description: "複習前幾週所學"
-  },
-  {
-    title: "第十六週（09/28 ~ 10/04）：前端中階",
-    description: "理解 Event Loop 與 JS 觀念"
-  },
-  {
-    title: "第十七週（10/05 ~ 10/11）：現代後端開發（上）",
-    description: "熟悉 Express"
-  },
-  {
-    title: "第十八週（10/12 ~ 10/18）：現代後端開發（下）",
-    description: "熟悉 ORM 與部署"
-  },
-  {
-    title: "第十九週（10/19 ~ 10/25）：產品開發流程",
-    description: "熟悉產品開發流程"
-  },
-  {
-    title: "第二十週（10/26 ~ 11/01）：複習週",
-    description: "複習前幾週所學"
-  },
-  {
-    title: "第二十一週（11/02 ~ 11/08）：前端框架（一）",
-    description: "前端框架"
-  },
-  {
-    title: "第二十二週（11/09 ~ 11/15）：前端框架（二）",
-    description: "前端框架"
-  },
-  {
-    title: "第二十三週（11/16 ~ 11/22）：前端框架（三）",
-    description: "前端框架"
-  },
-  {
-    title: "第二十四週（11/23 ~ 11/29）：前端框架（四）",
-    description: "前端框架"
-  },
-  {
-    title: "第二十五週（11/30 ~ 12/06）：Final Project",
-    description: "Final Project"
-  },
-  {
-    title: "第二十六週（12/07 ~ 12/13）：Final Project",
-    description: "Final Project"
-  }
-];
 
 class News extends React.PureComponent {
   render() {
@@ -212,41 +93,6 @@ Happy Learing, Happy Coding!
           </Col>
         </Row>
         <Row gutter={24}>
-          <Col md={10}>
-            <Card title="課程時程" bordered={false}>
-              <p>此課程為建議時程，可根據個人進度自由調整</p>
-              <Steps direction="vertical" current={current}>
-                {schedules.map((item, idx) => (
-                  <Step
-                    key={item.title}
-                    title={item.title}
-                    description={
-                      <div>
-                        {item.description}
-                        {idx === current && (
-                          <div className="mt2">
-                            <Popconfirm
-                              title="你確定完成這一週的進度了嗎？"
-                              okText="是"
-                              cancelText="否"
-                              onConfirm={this.onNext}
-                            >
-                              <Button type="primary">完成</Button>
-                            </Popconfirm>
-                            {current !== 0 && (
-                              <Button className="ml1" onClick={this.onBack}>
-                                回上一週
-                              </Button>
-                            )}
-                          </div>
-                        )}
-                      </div>
-                    }
-                  />
-                ))}
-              </Steps>
-            </Card>
-          </Col>
           <Col md={14}>
             <Card title="最新消息" bordered={false}>
               <Collapse bordered={false} defaultActiveKey={[0]}>
