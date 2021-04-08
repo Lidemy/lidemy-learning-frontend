@@ -74,3 +74,10 @@ export const achieveHomework = (id) =>
 export const getNoteList = (params) => instance.get("/notes", { params });
 export const createNote = (payload) => instance.post("/notes", payload);
 export const deleteNote = (id) => instance.delete("/notes/" + id);
+
+// syllabus
+export const getSyllabus = (params) => instance.get("/syllabus", { params });
+export const updateSyllabus = (params, payload) =>
+  instance.put("/syllabus", payload, { params });
+export const deleteSyllabus = (params) =>
+  instance.delete("/syllabus", { params });

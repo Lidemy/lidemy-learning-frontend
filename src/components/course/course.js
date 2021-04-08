@@ -4,11 +4,145 @@ import { Tooltip, Row, Col, Button, Card, Checkbox, Collapse } from "antd";
 import HomeworkModal from "./homeworkModal";
 import NoteModal from "./noteModal";
 import TokenModal from "./tokenModal";
+import { Link } from "react-router-dom";
 
 import Timeline from "./timeline";
 import { useSelector, useDispatch } from "react-redux";
 import { Actions } from "../../actions";
-import { courses, schedules } from "./data";
+import { getSyllabus } from "../../api";
+
+const schedules = [
+  {
+    title: "第一週（04/12 ~ 04/18）：暖身週",
+    description: "掌握 Git 與 Command line 操作",
+    date: "2021-04-12",
+  },
+  {
+    title: "第二週（04/19 ~ 04/25）：程式基礎（上）",
+    description: "掌握 JavaScript 基礎",
+    date: "2021-04-19",
+  },
+  {
+    title: "第三週（04/26 ~ 05/02）：程式基礎（下）",
+    description: "熟悉 JavaScript 程式基礎",
+    date: "2021-04-26",
+  },
+  {
+    title: "第四週（05/03 ~ 05/09）：網路基礎",
+    description: "熟悉網路概念與 API",
+    date: "2021-05-03",
+  },
+  {
+    title: "第五週（05/10 ~ 05/16）：複習週",
+    description: "複習前幾週所學",
+    date: "2021-05-10",
+  },
+  {
+    title: "第六週（05/17 ~ 05/23）：前端基礎（一）",
+    description: "掌握基本 HTML 與 CSS",
+    date: "2021-05-17",
+  },
+  {
+    title: "第七週（05/24 ~ 05/30）：前端基礎（二）",
+    description: "在網頁上使用 JavaScript 與事件處理",
+    date: "2021-05-24",
+  },
+  {
+    title: "第八週（05/31 ~ 06/06）：前端基礎（三）",
+    description: "用 JavaScript 與後端溝通",
+    date: "2021-05-31",
+  },
+  {
+    title: "第九週（06/07 ~ 06/13）：後端基礎（一）",
+    description: "掌握 PHP 與 SQL 基礎用法",
+    date: "2021-06-07",
+  },
+  {
+    title: "第十週（06/14 ~ 06/20）：複習週",
+    description: "複習前幾週所學",
+    date: "2021-06-14",
+  },
+  {
+    title: "第十一週（06/21 ~ 06/27）：資訊安全",
+    description: "認識資訊安全以及防範方法",
+    date: "2021-06-21",
+  },
+  {
+    title: "第十二週（06/28 ~ 07/04）：前後端整合",
+    description: "前後端整合",
+    date: "2021-06-28",
+  },
+  {
+    title: "第十三週（07/05 ~ 07/11）：現代前端工具",
+    description: "熟悉現代前端工具",
+    date: "2021-07-05",
+  },
+  {
+    title: "第十四週（07/12 ~ 07/18）：伺服器與網站部署",
+    description: "知道如何部署自己的程式",
+    date: "2021-07-12",
+  },
+  {
+    title: "第十五週（07/19 ~ 07/25）：複習週",
+    description: "複習前幾週所學",
+    date: "2021-07-19",
+  },
+  {
+    title: "第十六週（07/26 ~ 08/01）：JavaScript 核心與物件導向",
+    description: "理解 Event Loop 與 JS 觀念",
+    date: "2021-07-26",
+  },
+  {
+    title: "第十七週（08/02 ~ 08/08）：現代後端開發（上）",
+    description: "熟悉 Express",
+    date: "2021-08-02",
+  },
+  {
+    title: "第十八週(08/09 ~ 08/15）：現代後端開發（下）",
+    description: "熟悉 ORM 與部署",
+    date: "2021-08-09",
+  },
+  {
+    title: "第十九週（08/16 ~ 08/22）：產品開發流程",
+    description: "熟悉產品開發流程",
+    date: "2021-08-16",
+  },
+  {
+    title: "第二十週（08/23 ~ 08/29）：複習週",
+    description: "複習前幾週所學",
+    date: "2021-08-23",
+  },
+  {
+    title: "第二十一週（08/30 ~ 09/05）：前端框架（一）",
+    description: "前端框架",
+    date: "2021-08-30",
+  },
+  {
+    title: "第二十二週（09/06 ~ 09/12）：前端框架（二）",
+    description: "前端框架",
+    date: "2021-09-06",
+  },
+  {
+    title: "第二十三週（09/13 ~ 09/19）：前端框架（三）",
+    description: "前端框架",
+    date: "2021-09-13",
+  },
+  {
+    title: "第二十四週（09/20 ~ 09/26）：前端框架（四）",
+    description: "前端框架",
+    date: "2021-09-20",
+  },
+  {
+    title: "第二十五週（09/27 ~ 10/03）：Final Project",
+    description: "Final Project",
+    date: "2021-09-27",
+  },
+  {
+    title: "第二十六週（10/04 ~ 10/10）：Final Project",
+    description: "Final Project",
+    date: "2021-10-04",
+  },
+];
 
 const SyllabusPanel = ({ syllabus, isNotFinish, idx }) => (
   <Collapse.Panel
@@ -24,7 +158,7 @@ const SyllabusPanel = ({ syllabus, isNotFinish, idx }) => (
     disabled={isNotFinish}
     key={idx}
   >
-    {<Markdown source={syllabus.text} />}
+    {<Markdown source={syllabus.content} />}
   </Collapse.Panel>
 );
 
@@ -70,6 +204,7 @@ const Course = () => {
   const [syllabusWeek, setSyllabusWeek] = useState(current);
   const [isCollapseAll, setIsCollapseAll] = useState(false);
   const [activeList, setActiveList] = useState([0]);
+  const [syllabusList, setSyllabusList] = useState([]);
 
   const [homeworkVisible, setHomeworkVisible] = useState(false);
   const [noteVisible, setNoteVisible] = useState(false);
@@ -113,9 +248,7 @@ const Course = () => {
     setIsCollapseAll(evt.target.checked);
     if (evt.target.checked) {
       setActiveList(
-        courses[syllabusWeek].syllabusList.map((syllabus, idx) =>
-          syllabus.status ? -1 : idx
-        )
+        syllabusList.map((syllabus, idx) => (syllabus.visible ? -1 : idx))
       );
     } else {
       setActiveList([]);
@@ -143,6 +276,9 @@ const Course = () => {
 
   useEffect(() => {
     getNoteList({ week: syllabusWeek });
+    getSyllabus({ week: syllabusWeek }).then((res) => {
+      setSyllabusList(res.data);
+    });
   }, [syllabusWeek, isLoadingCreateNote, isLoadingDeleteNote]);
 
   useEffect(() => {
@@ -162,7 +298,6 @@ const Course = () => {
         onCancel={() => setNoteVisible(false)}
         onConfirm={handleCreateNote}
       />
-      ;
       <TokenModal
         week={syllabusWeek}
         visible={tokenVisible}
@@ -200,6 +335,9 @@ const Course = () => {
                     輸入通關碼
                   </Button>
                 )}
+                {user.isAdmin && (
+                  <Link to={`/admin/syllabus/${syllabusWeek}`}>編輯課綱</Link>
+                )}
               </div>
               <Checkbox checked={isCollapseAll} onChange={openPanel}>
                 全部展開
@@ -212,10 +350,10 @@ const Course = () => {
               activeKey={activeList}
             >
               {/* ant design bug */}
-              {courses[syllabusWeek - 1].syllabusList.map((syllabus, idx) =>
+              {syllabusList.map((syllabus, idx) =>
                 SyllabusPanel({
                   syllabus,
-                  isNotFinish: syllabus.status && unitStatus === 0,
+                  isNotFinish: syllabus.visible && unitStatus === 0,
                   idx,
                 })
               )}

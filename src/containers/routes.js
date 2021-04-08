@@ -11,6 +11,7 @@ import Course from "../components/course";
 import Homeworks from "../components/homeworks";
 import Reviews from "../components/reviews";
 import TA from "../components/ta";
+import Syllabus from "../components/syllabus";
 
 const Routes = ({ user }) => {
   if (!user) {
@@ -32,6 +33,9 @@ const Routes = ({ user }) => {
       {user.isTA && <Route path="/reviews" component={Reviews} />}
       {user.isAdmin && <Route path="/admin/ta" component={TA} />}
       {user.isAdmin && <Route path="/admin/news" component={AdminNews} />}
+      {user.isAdmin && (
+        <Route path="/admin/syllabus/:week" component={Syllabus} />
+      )}
     </Switch>
   );
 };
