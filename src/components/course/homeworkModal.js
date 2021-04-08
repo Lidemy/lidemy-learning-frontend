@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Modal, Input, Select, Checkbox } from "antd";
+import { Modal, Input, Checkbox } from "antd";
 
 const HomeworkModal = ({ defaultWeek, visible, onCancel, onConfirm }) => {
   const init = {

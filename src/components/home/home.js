@@ -61,8 +61,7 @@ class Home extends Component {
   };
 
   render() {
-    const { newsList, user, isLoadingUpdateProgress } = this.props;
-    const current = user.progress - 1;
+    const { newsList, isLoadingUpdateProgress } = this.props;
     return (
       <section>
         {isLoadingUpdateProgress && <Loading />}
