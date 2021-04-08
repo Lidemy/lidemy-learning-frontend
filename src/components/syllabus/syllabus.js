@@ -25,7 +25,7 @@ const FormList = ({
             {
               content: values.content,
               title: values.title,
-              visible: false,
+              visible: values.visible,
             }
           ).then(() => {
             setLoading(false);
