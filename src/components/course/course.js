@@ -4,6 +4,7 @@ import { Tooltip, Row, Col, Button, Card, Checkbox, Collapse } from "antd";
 import HomeworkModal from "./homeworkModal";
 import NoteModal from "./noteModal";
 import TokenModal from "./tokenModal";
+import Loading from "../loading";
 import { Link } from "react-router-dom";
 
 import Timeline from "./timeline";
@@ -209,6 +210,7 @@ const Course = () => {
   const [homeworkVisible, setHomeworkVisible] = useState(false);
   const [noteVisible, setNoteVisible] = useState(false);
   const [tokenVisible, setTokenVisible] = useState(false);
+  const [isLoading, setLoading] = useState(false);
 
   const {
     isLoadingCreateHomework,
@@ -244,15 +246,20 @@ const Course = () => {
     setSyllabusWeek(week);
   };
 
-  const openPanel = (evt) => {
-    setIsCollapseAll(evt.target.checked);
-    if (evt.target.checked) {
-      setActiveList(
-        syllabusList.map((syllabus, idx) => (syllabus.visible ? -1 : idx))
-      );
+  const openPanel = (isOpen) => {
+    const activeList = syllabusList.map((syllabus, idx) =>
+      syllabus.visible && unitStatus === 0 ? -1 : idx
+    );
+    if (isOpen) {
+      setActiveList([...activeList, activeList.length]);
     } else {
       setActiveList([]);
     }
+  };
+
+  const handleChcked = (evt) => {
+    setIsCollapseAll(evt.target.checked);
+    openPanel(evt.target.checked);
   };
 
   const handleCreateHomework = (payload) => {
@@ -275,9 +282,16 @@ const Course = () => {
   };
 
   useEffect(() => {
+    openPanel(isCollapseAll);
+  }, [syllabusList]);
+
+  useEffect(() => {
+    setLoading(true);
+    console.log(syllabusWeek);
     getNoteList({ week: syllabusWeek });
     getSyllabus({ week: syllabusWeek }).then((res) => {
       setSyllabusList(res.data);
+      setLoading(false);
     });
   }, [syllabusWeek, isLoadingCreateNote, isLoadingDeleteNote]);
 
@@ -339,31 +353,33 @@ const Course = () => {
                   <Link to={`/admin/syllabus/${syllabusWeek}`}>編輯課綱</Link>
                 )}
               </div>
-              <Checkbox checked={isCollapseAll} onChange={openPanel}>
+              <Checkbox checked={isCollapseAll} onChange={handleChcked}>
                 全部展開
               </Checkbox>
             </div>
-            <Collapse
-              bordered={false}
-              defaultActiveKey={[0]}
-              onChange={(activeList) => setActiveList(activeList)}
-              activeKey={activeList}
-            >
-              {/* ant design bug */}
-              {syllabusList.map((syllabus, idx) =>
-                SyllabusPanel({
-                  syllabus,
-                  isNotFinish: syllabus.visible && unitStatus === 0,
-                  idx,
-                })
-              )}
-              {NotePanel({
-                userId: user.id,
-                notes: noteList,
-                handleCreate: () => setNoteVisible(true),
-                handleDelete: handleDeleteNote,
-              })}
-            </Collapse>
+            {!isLoading && (
+              <Collapse
+                bordered={false}
+                onChange={(activeList) => setActiveList(activeList)}
+                activeKey={activeList}
+              >
+                {/* ant design bug */}
+                {syllabusList.map((syllabus, idx) =>
+                  SyllabusPanel({
+                    syllabus,
+                    isNotFinish: syllabus.visible && unitStatus === 0,
+                    idx,
+                  })
+                )}
+                {NotePanel({
+                  userId: user.id,
+                  notes: noteList,
+                  handleCreate: () => setNoteVisible(true),
+                  handleDelete: handleDeleteNote,
+                })}
+              </Collapse>
+            )}
+            {isLoading && <Loading />}
           </Card>
         </Col>
       </Row>
