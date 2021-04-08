@@ -50,6 +50,22 @@ const { Actions, Constants } = EasyActions({
     return { type, error };
   },
 
+  UPDATE_PROGRESS(type, progress, token) {
+    return { type, progress, token };
+  },
+
+  UPDATE_PROGRESS_RESULT(type, error) {
+    return { type, error };
+  },
+
+  GET_PROGRESS(type, userId) {
+    return { type, userId };
+  },
+
+  GET_PROGRESS_RESULT(type, list, error) {
+    return { type, list, error };
+  },
+
   // register
   REGISTER(type, code) {
     return { type, code };
@@ -230,7 +246,32 @@ const { Actions, Constants } = EasyActions({
 
   CLEAR_HOMEWORKS(type) {
     return { type };
-  }
+  },
+
+  // note
+  GET_NOTE_LIST(type, payload) {
+    return { type, payload };
+  },
+
+  GET_NOTE_LIST_RESULT(type, error, list) {
+    return { type, error, list };
+  },
+
+  CREATE_NOTE(type, payload) {
+    return { type, payload };
+  },
+
+  CREATE_NOTE_RESULT(type, error) {
+    return { type, error };
+  },
+
+  DELETE_NOTE(type, id) {
+    return { type, id };
+  },
+
+  DELETE_NOTE_RESULT(type, error) {
+    return { type, error };
+  },
 });
 
 export { Actions, Constants as ActionTypes };

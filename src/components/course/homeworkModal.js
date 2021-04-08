@@ -1,0 +1,102 @@
+import React, { useState, useEffect } from "react";
+import { Modal, Input, Checkbox } from "antd";
+
+const HomeworkModal = ({ defaultWeek, visible, onCancel, onConfirm }) => {
+  const init = {
+    week: defaultWeek,
+    prUrl: "",
+    isCheckHomework: false,
+    isCheckReview: false,
+  };
+  const [eachEntry, setEachEntry] = useState(init);
+  const [errMsg, setErr] = useState("");
+  const { prUrl, isCheckHomework, isCheckReview } = eachEntry;
+
+  useEffect(() => {
+    setEachEntry({
+      ...init,
+    });
+  }, [visible, defaultWeek]);
+
+  const handleConfirm = () => {
+    if (
+      prUrl &&
+      prUrl.indexOf("github") >= 0 &&
+      prUrl.indexOf("pull") >= 0 &&
+      isCheckHomework &&
+      isCheckReview
+    ) {
+      onConfirm({
+        ...eachEntry,
+      });
+      handleCancel();
+      onCancel();
+    } else {
+      setErr("PR 連結不得為空或非 GitHub PR 連結");
+      if (!isCheckHomework || !isCheckReview) {
+        setErr("請確認是否檢查過作業須知");
+      }
+    }
+  };
+
+  const handleCancel = () => {
+    setEachEntry({
+      ...init,
+    });
+    setErr("");
+    onCancel();
+  };
+
+  const handleInputChange = (evt) => {
+    setEachEntry({
+      ...eachEntry,
+      [evt.target.name]: evt.target.value,
+    });
+  };
+
+  const handleInputCheck = (evt) => {
+    setEachEntry({
+      ...eachEntry,
+      [evt.target.name]: evt.target.checked,
+    });
+  };
+
+  return (
+    <Modal
+      title="作業"
+      okText="送出"
+      cancelText="取消"
+      onOk={handleConfirm}
+      onCancel={handleCancel}
+      visible={visible}
+    >
+      <div className="mb2">
+        <label>PR 連結</label>
+        <Input onChange={handleInputChange} name="prUrl" value={prUrl} />
+        <div className="red">{errMsg}</div>
+      </div>
+      <div className="mb2">
+        <div>
+          <Checkbox
+            name="isCheckHomework"
+            checked={isCheckHomework}
+            onChange={handleInputCheck}
+          >
+            確認已經檢查過作業，有完成需求
+          </Checkbox>
+        </div>
+        <div>
+          <Checkbox
+            name="isCheckReview"
+            checked={isCheckReview}
+            onChange={handleInputCheck}
+          >
+            確認已經看過當週的自我檢討並修正錯誤
+          </Checkbox>
+        </div>
+      </div>
+    </Modal>
+  );
+};
+
+export default HomeworkModal;

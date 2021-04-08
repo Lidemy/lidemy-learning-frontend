@@ -6,14 +6,18 @@ import reducers from "./reducers";
 import { rootEpic } from "./epics";
 import authListener from "./middlewares/authListener";
 
+const isProduction = process.env.NODE_ENV === "production";
+
 const logger = createLogger({
-  collapsed: true
+  collapsed: true,
 });
 
 const epicMiddleware = createEpicMiddleware();
 const store = createStore(
   reducers,
-  applyMiddleware(logger, authListener, epicMiddleware)
+  isProduction
+    ? applyMiddleware(authListener, epicMiddleware)
+    : applyMiddleware(logger, authListener, epicMiddleware)
 );
 
 epicMiddleware.run(rootEpic);

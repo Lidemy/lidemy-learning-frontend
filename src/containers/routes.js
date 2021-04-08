@@ -7,9 +7,11 @@ import Reports from "./reports";
 import Profile from "./profile";
 import Guest from "./guest";
 import AdminNews from "./adminNews";
+import Course from "../components/course";
 import Homeworks from "../components/homeworks";
 import Reviews from "../components/reviews";
 import TA from "../components/ta";
+import Syllabus from "../components/syllabus";
 
 const Routes = ({ user }) => {
   if (!user) {
@@ -26,16 +28,20 @@ const Routes = ({ user }) => {
       <Route path="/reports" component={Reports} />
       <Route path="/profile" component={Profile} />
       <Route path="/users/:id" component={Profile} />
+      {user.isStudent && <Route path="/course" component={Course} />}
       {user.isStudent && <Route path="/homeworks" component={Homeworks} />}
       {user.isTA && <Route path="/reviews" component={Reviews} />}
       {user.isAdmin && <Route path="/admin/ta" component={TA} />}
       {user.isAdmin && <Route path="/admin/news" component={AdminNews} />}
+      {user.isAdmin && (
+        <Route path="/admin/syllabus/:week" component={Syllabus} />
+      )}
     </Switch>
   );
 };
 
-const mapStateToProps = store => ({
-  user: store.auth.user
+const mapStateToProps = (store) => ({
+  user: store.auth.user,
 });
 
 export default withRouter(connect(mapStateToProps)(Routes));
