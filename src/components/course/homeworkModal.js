@@ -1,8 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Modal, Input, Select, Checkbox } from "antd";
 
-const { Option } = Select;
-
 const HomeworkModal = ({ defaultWeek, visible, onCancel, onConfirm }) => {
   const init = {
     week: defaultWeek,
@@ -12,7 +10,7 @@ const HomeworkModal = ({ defaultWeek, visible, onCancel, onConfirm }) => {
   };
   const [eachEntry, setEachEntry] = useState(init);
   const [errMsg, setErr] = useState("");
-  const { week, prUrl, isCheckHomework, isCheckReview } = eachEntry;
+  const { prUrl, isCheckHomework, isCheckReview } = eachEntry;
 
   useEffect(() => {
     setEachEntry({
@@ -63,13 +61,6 @@ const HomeworkModal = ({ defaultWeek, visible, onCancel, onConfirm }) => {
     });
   };
 
-  const onChange = (value) => {
-    setEachEntry({
-      ...eachEntry,
-      week: value,
-    });
-  };
-
   return (
     <Modal
       title="作業"
@@ -79,18 +70,6 @@ const HomeworkModal = ({ defaultWeek, visible, onCancel, onConfirm }) => {
       onCancel={handleCancel}
       visible={visible}
     >
-      <div className="mb2">
-        <label>第幾週</label>
-        <div>
-          <Select value={week} onChange={onChange} style={{ width: "100px" }}>
-            {[...Array(24).keys()].map((item) => (
-              <Option key={item} value={item + 1}>
-                Week {item + 1}
-              </Option>
-            ))}
-          </Select>
-        </div>
-      </div>
       <div className="mb2">
         <label>PR 連結</label>
         <Input onChange={handleInputChange} name="prUrl" value={prUrl} />
