@@ -287,7 +287,6 @@ const Course = () => {
 
   useEffect(() => {
     setLoading(true);
-    console.log(syllabusWeek);
     getNoteList({ week: syllabusWeek });
     getSyllabus({ week: syllabusWeek }).then((res) => {
       setSyllabusList(res.data);
