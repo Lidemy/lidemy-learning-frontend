@@ -1,6 +1,15 @@
 import React, { useEffect, useState } from "react";
 import Markdown from "../common/markdown";
-import { Tooltip, Row, Col, Button, Card, Checkbox, Collapse } from "antd";
+import {
+  Tooltip,
+  Row,
+  Col,
+  Button,
+  Card,
+  Checkbox,
+  Collapse,
+  Modal
+} from "antd";
 import HomeworkModal from "./homeworkModal";
 import NoteModal from "./noteModal";
 import TokenModal from "./tokenModal";
@@ -11,6 +20,8 @@ import Timeline from "./timeline";
 import { useSelector, useDispatch } from "react-redux";
 import { Actions } from "../../actions";
 import { getSyllabus } from "../../api";
+
+const { confirm } = Modal;
 
 const schedules = [
   {
@@ -347,7 +358,34 @@ const Course = () => {
                 <Button
                   type="primary"
                   style={{ marginRight: "5px" }}
-                  onClick={() => setHomeworkVisible(true)}
+                  onClick={() => {
+                    if (unitStatus === 1) {
+                      return setHomeworkVisible(true);
+                    }
+
+                    // 先跳自我檢討 modal 出來
+                    confirm({
+                      title: "交作業前檢查",
+                      content: (
+                        <div>
+                          請問你在寫完作業之後，有先看過
+                          <a
+                            href={`https://github.com/Lidemy/mentor-program-5th/tree/master/examples/week${syllabusWeek}`}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                          >
+                            自我檢討
+                          </a>
+                          並且修正常見錯誤了嗎？
+                        </div>
+                      ),
+                      okText: "有，我看過並修正過了",
+                      cancelText: "還沒，我先去看",
+                      onOk: () => {
+                        setHomeworkVisible(true);
+                      }
+                    });
+                  }}
                 >
                   {unitStatus === 1 ? "更新作業" : "繳交作業"}
                 </Button>
