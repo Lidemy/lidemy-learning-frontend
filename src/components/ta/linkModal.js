@@ -16,7 +16,7 @@ function isValidJWT(token) {
 
 const LinkModal = ({ visible, onCancel, onConfirm }) => {
   const init = {
-    semester: 4,
+    semester: 5,
     role: "student"
   };
   const [link, setLink] = useState("");
@@ -85,7 +85,7 @@ const LinkModal = ({ visible, onCancel, onConfirm }) => {
         <label>期數</label>
         <div>
           <Select value={semester} onChange={onChange}>
-            {[...Array(4).keys()].map(item => (
+            {[...Array(5).keys()].map(item => (
               <Option key={item} value={item + 1}>
                 {item + 1}
               </Option>

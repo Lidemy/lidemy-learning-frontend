@@ -23,6 +23,13 @@ code {
   color: white;
   float: left;
   font-size: 20px;
+  display: none;
+}
+
+@media screen and (min-width: 768px) {
+  .logo {
+    display: block;
+  }
 }
 
 .ant-comment-content-author > a,

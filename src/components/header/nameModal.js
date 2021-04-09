@@ -62,7 +62,7 @@ const NameModal = ({ visible, instance, onCancel, onConfirm }) => {
         <Input onChange={handleInputChange} name="nickname" value={nickname} />
       </div>
       <div className="mb2">
-        <label>更改 Slack Id:</label>
+        <label>更改 Mattermost Id:</label>
         <Input onChange={handleInputChange} name="slackId" value={slackId} />
       </div>
     </Modal>

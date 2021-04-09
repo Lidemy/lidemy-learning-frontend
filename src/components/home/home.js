@@ -80,10 +80,19 @@ Happy Learing, Happy Coding!
 
 ## 資源整理
 
+1. [Lidemy 線上課程網站](https://lidemy.com)
+2. [LIOJ](https://oj.lidemy.com/)
+3. [Lidemy 課程問答討論區](https://github.com/Lidemy/forum/discussions)
+
+### 第五期
+
+1. [第五期課程大綱](https://github.com/Lidemy/mentor-program-5th)
+2. 第五期筆記請在「課程總覽」頁面分享
+
+### 第四期
+
 1. [第四期課程大綱](https://github.com/Lidemy/mentor-program-4th)
 2. [第四期筆記專區](https://hackmd.io/@huli/r1PtmBep8)
-3. [Lidemy 線上課程網站](https://lidemy.com)
-4. [LIOJ](https://oj.lidemy.com/)
 5. [第四期匿名提問箱](https://forms.gle/2RHmLmJGvNpG22Pu8)
 6. [第四期繳款表單（每月 12 號以前繳款，12500 元）](https://forms.gle/rS1b9BNcimnadL7x7)`}
                 />
