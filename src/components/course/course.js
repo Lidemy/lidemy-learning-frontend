@@ -170,7 +170,7 @@ const NotePanel = ({ userId, notes, handleCreate, handleDelete }) => (
       {!!notes.length &&
         notes.map((note, idx) => (
           <li key={idx}>
-            <a href={note.link} className="mr2">
+            <a href={note.link} target="_blank" className="mr2">
               {note.title}
             </a>
             {note.UserId === userId && (
@@ -380,7 +380,13 @@ const Course = () => {
                 )}
                 {NotePanel({
                   userId: user.id,
-                  notes: noteList,
+                  notes: [
+                    {
+                      title: "第四期學生筆記大補帖",
+                      link: "https://hackmd.io/@huli/r1PtmBep8"
+                    },
+                    ...noteList
+                  ],
                   handleCreate: () => setNoteVisible(true),
                   handleDelete: handleDeleteNote
                 })}
