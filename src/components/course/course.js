@@ -170,7 +170,12 @@ const NotePanel = ({ userId, notes, handleCreate, handleDelete }) => (
       {!!notes.length &&
         notes.map((note, idx) => (
           <li key={idx}>
-            <a href={note.link} target="_blank" className="mr2">
+            <a
+              href={note.link}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="mr2"
+            >
               {note.title}
             </a>
             {note.UserId === userId && (
