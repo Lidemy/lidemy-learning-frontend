@@ -2,6 +2,7 @@ import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import { tomorrow } from "react-syntax-highlighter/dist/esm/styles/prism";
 import ReactMarkdown from "react-markdown";
 import ReactMarkdownWithHtml from "react-markdown/with-html";
+import gfm from "remark-gfm";
 
 import React from "react";
 
@@ -27,6 +28,7 @@ const Markdown = ({ source, allowHtml }) => {
       source={source}
       renderers={{ code: CodeBlock }}
       linkTarget="_blank"
+      plugins={[gfm]}
       allowDangerousHtml={allowHtml}
     />
   );
