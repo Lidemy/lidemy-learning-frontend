@@ -16,26 +16,27 @@ code {
 }
 
 /* copy from hackmd */
-table {
+
+.md-body table {
   border-collapse: collapse;
   border-spacing: 0;
 }
 
-table tr {
+.md-body table tr {
   border-top: 1px solid #ccc;
 }
 
-table tr:nth-child(2n) {
+.md-body table tr:nth-child(2n) {
   background: #f8f8f8;
 }
 
-table th,
-table td {
+.md-body table th,
+.md-body table td {
   padding: 6px 13px;
   border: 1px solid #ddd;
 }
 
-table th {
+.md-body table th {
   font-weight: bold;
 }
 

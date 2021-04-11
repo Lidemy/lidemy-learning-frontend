@@ -25,6 +25,7 @@ const Markdown = ({ source, allowHtml }) => {
   const Comp = allowHtml ? ReactMarkdownWithHtml : ReactMarkdown;
   return (
     <Comp
+      className="md-body"
       source={source}
       renderers={{ code: CodeBlock }}
       linkTarget="_blank"
