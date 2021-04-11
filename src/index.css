@@ -15,6 +15,30 @@ code {
     monospace;
 }
 
+/* copy from hackmd */
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+table tr {
+  border-top: 1px solid #ccc;
+}
+
+table tr:nth-child(2n) {
+  background: #f8f8f8;
+}
+
+table th,
+table td {
+  padding: 6px 13px;
+  border: 1px solid #ddd;
+}
+
+table th {
+  font-weight: bold;
+}
+
 .logo {
   width: 105px;
   height: 31px;
