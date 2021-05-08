@@ -12,6 +12,7 @@ import Homeworks from "../components/homeworks";
 import Reviews from "../components/reviews";
 import TA from "../components/ta";
 import Syllabus from "../components/syllabus";
+import Dashboard from "../components/dashboard";
 
 const Routes = ({ user }) => {
   if (!user) {
@@ -33,6 +34,7 @@ const Routes = ({ user }) => {
       {user.isTA && <Route path="/reviews" component={Reviews} />}
       {user.isAdmin && <Route path="/admin/ta" component={TA} />}
       {user.isAdmin && <Route path="/admin/news" component={AdminNews} />}
+      {user.isAdmin && <Route path="/admin/dashboard" component={Dashboard} />}
       {user.isAdmin && (
         <Route path="/admin/syllabus/:week" component={Syllabus} />
       )}
@@ -40,8 +42,8 @@ const Routes = ({ user }) => {
   );
 };
 
-const mapStateToProps = (store) => ({
-  user: store.auth.user,
+const mapStateToProps = store => ({
+  user: store.auth.user
 });
 
 export default withRouter(connect(mapStateToProps)(Routes));
