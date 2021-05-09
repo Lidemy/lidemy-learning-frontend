@@ -29,30 +29,27 @@ const Report = ({ report }) => {
   );
 };
 
-const UserPanel = ({ user, key }) => {
-  console.log(user);
-  return (
-    <Collapse.Panel key={key} header={`${user.nickname}(${user.count})`}>
-      <Row>
-        <div>
-          <Button type="link" target={`/users/${user.id}`}>
-            個人檔案
-          </Button>
-          <span className="ml2 mr2">方案：{user.priceType}</span>
-          <span>作業數：{user.hw}</span>
-        </div>
-      </Row>
-      <Row gutter={5}>
-        {user.reports &&
-          user.reports.map(report => (
-            <Col span={8} className="mb1">
-              <Report report={report} />
-            </Col>
-          ))}
-      </Row>
-    </Collapse.Panel>
-  );
-};
+const UserPanel = ({ user, key }) => (
+  <Collapse.Panel key={key} header={`${user.nickname}(${user.count})`}>
+    <Row>
+      <div>
+        <Button type="link" target={`/users/${user.id}`}>
+          個人檔案
+        </Button>
+        <span className="ml2 mr2">方案：{user.priceType}</span>
+        <span>作業數：{user.hw}</span>
+      </div>
+    </Row>
+    <Row gutter={5}>
+      {user.reports &&
+        user.reports.map(report => (
+          <Col span={8} className="mb1">
+            <Report report={report} />
+          </Col>
+        ))}
+    </Row>
+  </Collapse.Panel>
+);
 
 const Dashboard = () => {
   const [rangeDate, setRangeDate] = useState([
