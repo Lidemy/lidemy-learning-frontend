@@ -5,11 +5,12 @@ import { login, logout } from "../../utils/firebase";
 import NameModal from "./nameModal";
 import Loading from "../loading";
 
+const { SubMenu } = Menu;
 const AntdHeader = Layout.Header;
 
 class Header extends Component {
   state = {
-    modalOpen: false,
+    modalOpen: false
   };
 
   componentDidUpdate(prevProps) {
@@ -36,6 +37,7 @@ class Header extends Component {
     if (pathname.indexOf("/reviews") === 0) return "reviews";
     if (pathname.indexOf("/admin/ta") === 0) return "ta";
     if (pathname.indexOf("/admin/news") === 0) return "adminNews";
+    if (pathname.indexOf("/admin/dashboard") === 0) return "dashbaord";
     if (pathname.indexOf("/course") === 0) return "course";
     return "home";
   };
@@ -53,17 +55,17 @@ class Header extends Component {
 
   openModal = () => {
     this.setState({
-      modalOpen: true,
+      modalOpen: true
     });
   };
 
   closeModal = () => {
     this.setState({
-      modalOpen: false,
+      modalOpen: false
     });
   };
 
-  handleUpdate = (data) => {
+  handleUpdate = data => {
     const { user, updateUser } = this.props;
     updateUser(user.id, data);
   };
@@ -120,14 +122,17 @@ class Header extends Component {
             </Menu.Item>
           )}
           {isAdmin && (
-            <Menu.Item key="adminNews">
-              <Link to="/admin/news">最新消息</Link>
-            </Menu.Item>
-          )}
-          {isAdmin && (
-            <Menu.Item key="ta">
-              <Link to="/admin/ta">助教列表</Link>
-            </Menu.Item>
+            <SubMenu title="管理後台">
+              <Menu.Item key="dashboard">
+                <Link to="/admin/dashboard">學生列表</Link>
+              </Menu.Item>
+              <Menu.Item key="adminNews">
+                <Link to="/admin/news">最新消息</Link>
+              </Menu.Item>
+              <Menu.Item key="ta">
+                <Link to="/admin/ta">助教列表</Link>
+              </Menu.Item>
+            </SubMenu>
           )}
           {isMobile && isLogin && user && user.nickname && (
             <Menu.Item key="edit">
@@ -150,7 +155,7 @@ class Header extends Component {
           style={{
             right: "32px",
             top: 0,
-            height: "64px",
+            height: "64px"
           }}
         >
           {user && !isMobile && (
@@ -161,7 +166,7 @@ class Header extends Component {
                 style={{
                   width: "42px",
                   height: "42px",
-                  marginRight: "10px",
+                  marginRight: "10px"
                 }}
               />
               <div>{user.nickname || ""}</div>
