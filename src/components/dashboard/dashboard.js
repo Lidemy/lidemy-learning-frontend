@@ -32,15 +32,14 @@ const Report = ({ report }) => {
 const UserPanel = ({ user, key }) => {
   console.log(user);
   return (
-    <Collapse.Panel key={key} header={user.nickname}>
+    <Collapse.Panel key={key} header={`${user.nickname}(${user.count})`}>
       <Row>
         <div>
           <Button type="link" target={`/users/${user.id}`}>
             個人檔案
           </Button>
           <span className="ml2 mr2">方案：{user.priceType}</span>
-          <span className="mr2">作業數：{user.hw}</span>
-          <span>心得數：{user.count}</span>
+          <span>作業數：{user.hw}</span>
         </div>
       </Row>
       <Row gutter={5}>
@@ -58,7 +57,7 @@ const UserPanel = ({ user, key }) => {
 const Dashboard = () => {
   const [rangeDate, setRangeDate] = useState([
     moment()
-      .subtract(7, "days")
+      .subtract(14, "days")
       .calendar(),
     moment().format("YYYY/MM/DD")
   ]);
