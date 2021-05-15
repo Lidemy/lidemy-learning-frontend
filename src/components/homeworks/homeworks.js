@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Table, Button, Typography, Tabs } from "antd";
+import { Table, Typography, Tabs } from "antd";
 import HomeworkModal from "./homeworkModal";
 import Loading from "../loading";
 import columns from "../common/columns";
@@ -54,10 +54,6 @@ const Homeworks = () => {
 
   const closeModal = () => {
     setVisible(false);
-  };
-
-  const showModal = () => {
-    setVisible(true);
   };
 
   const handleCreate = payload => {
@@ -120,7 +116,6 @@ const Homeworks = () => {
         onConfirm={handleCreate}
       />
       <Title level={3}>作業列表</Title>
-      <Button onClick={showModal}>新增作業</Button>
       <Tabs defaultActiveKey="all" onChange={changeTab}>
         <TabPane tab="所有作業" key="all">
           {isLoadingGetHomeworks && <Loading />}
