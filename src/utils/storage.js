@@ -4,6 +4,7 @@ const showAllReport = "show-all-report";
 const showOneColumn = "show-one-column";
 const lastReadId = "last-read-id";
 const templateKey = "report-template";
+const bankCodeKey = "bank-code";
 
 const isLocalStorageAvailable = () => {
   try {
@@ -45,6 +46,14 @@ const storage = {
 
   getTempReport: text => {
     return storage.get(tempReport);
+  },
+
+  setBankCode: text => {
+    storage.set(bankCodeKey, text);
+  },
+
+  getBankCode: text => {
+    return storage.get(bankCodeKey);
   },
 
   setShowAllReport: bool => {

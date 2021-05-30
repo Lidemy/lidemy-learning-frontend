@@ -19,6 +19,7 @@ import Markdown from "../common/markdown";
 import moment from "moment";
 import Loading from "../loading";
 import ReportModal from "./reportModal";
+import TransactionContainer from "../../containers/transactionContainer";
 
 const START_DATE = "2021-04-12";
 const pageSize = 10;
@@ -197,7 +198,8 @@ class Profile extends Component {
       userReports,
       isLoadingGetUserReports,
       isLoadingDeleteReport,
-      isLoadingUpdateReport
+      isLoadingUpdateReport,
+      user
     } = this.props;
 
     const wordCount = (userProfile && userProfile.wordCount) || "";
@@ -215,10 +217,10 @@ class Profile extends Component {
 
     const isLoading =
       isLoadingDeleteReport || isLoadingUpdateReport || isLoadingGetUserReports;
-
     return (
       <div className="profile-page">
         {isLoading && <Loading />}
+        <TransactionContainer />
         <ReportModal
           visible={showModal}
           instance={instance}

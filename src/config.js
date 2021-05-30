@@ -9,7 +9,8 @@ const config = {
     storageBucket: "lidemy-learning.appspot.com",
     messagingSenderId: "623325319301"
   },
-  apiHost: "https://learning-api.lidemy.com/v1"
+  // https://learning-api.lidemy.com/v1
+  apiHost: "http://localhost:4002/v1"
 };
 
 export default config;
