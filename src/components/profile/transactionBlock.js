@@ -15,8 +15,16 @@ import {
   Popconfirm
 } from "antd";
 import moment from "moment";
-import { userSelectPlan, getTransactions } from "../../api";
+import {
+  userSelectPlan,
+  getTransactions,
+  paidTransaction,
+  createTransaction,
+  deleteTransaction
+} from "../../api";
 import storage from "../../utils/storage";
+import PayModal from "./payModal";
+import CreateTransactionModal from "./createTransactionModal";
 
 const { confirm } = Modal;
 
@@ -122,6 +130,10 @@ function Transactions({ user }) {
   const [transactions, setTransactions] = useState([]);
   const [payInfo, setPayInfo] = useState();
   const [isPayModalOpen, setIsPayModalOpen] = useState(false);
+  const [
+    isCreateTransactionModalOpen,
+    setIsCreateTransactionModalOpen
+  ] = useState(false);
   const [bankCode, setBankCode] = useState();
 
   function getTransactionsData() {
@@ -185,19 +197,33 @@ function Transactions({ user }) {
           if (record.status === "paid") return "-";
           return (
             <span>
-              <a
-                onClick={() => {
-                  setPayInfo(record);
-                  setIsPayModalOpen(true);
-                }}
-              >
-                付款
-              </a>
+              {record.status === "pending" && (
+                <a
+                  onClick={() => {
+                    setPayInfo(record);
+                    setIsPayModalOpen(true);
+                  }}
+                >
+                  付款
+                </a>
+              )}
               &nbsp;&nbsp;&nbsp;
-              {!record.isCreateByAdmin && (
+              {!record.isCreateByAdmin && record.status === "pending" && (
                 <Popconfirm
                   title="你確定要刪除嗎？"
-                  onConfirm={() => {}}
+                  onConfirm={() => {
+                    setIsLoading(true);
+                    deleteTransaction(record.id)
+                      .then(() => {
+                        setIsLoading(false);
+                        message.success("刪除成功");
+                        getTransactionsData();
+                      })
+                      .catch(() => {
+                        setIsLoading(false);
+                        message.error("刪除失敗");
+                      });
+                  }}
                   okText="是"
                   cancelText="否"
                 >
@@ -212,6 +238,40 @@ function Transactions({ user }) {
     return columns;
   }
 
+  function handlePayModalConfirm({ bankCode, payDate }) {
+    setIsPayModalOpen(false);
+    setIsLoading(true);
+    paidTransaction(payInfo.id, {
+      bankCode: bankCode,
+      payTime: payDate
+    })
+      .then(() => {
+        // reload table
+        message.success("更新成功！");
+        getTransactionsData();
+      })
+      .catch(err => {
+        setIsLoading(false);
+        console.log(err);
+        message.error("更新失敗：" + err.message);
+      });
+  }
+
+  function handleCreateModalConfirm(data) {
+    setIsCreateTransactionModalOpen(false);
+    setIsLoading(true);
+    createTransaction(data)
+      .then(() => {
+        message.success("新增成功！");
+        getTransactionsData();
+      })
+      .catch(err => {
+        setIsLoading(false);
+        console.log(err);
+        message.error("新增失敗：" + err.message);
+      });
+  }
+
   useEffect(() => {
     getTransactionsData();
     setBankCode(storage.getBankCode() || "");
@@ -220,6 +280,16 @@ function Transactions({ user }) {
   return (
     <Row gutter={32}>
       <Col md={32}>
+        <PayModal
+          visible={isPayModalOpen}
+          onCancel={() => setIsPayModalOpen(false)}
+          onConfirm={handlePayModalConfirm}
+        />
+        <CreateTransactionModal
+          visible={isCreateTransactionModalOpen}
+          onCancel={() => setIsCreateTransactionModalOpen(false)}
+          onConfirm={handleCreateModalConfirm}
+        />
         <Card title="學費紀錄" bordered={false}>
           <p>
             你目前選擇的方案是：{priceType}{" "}
@@ -250,11 +320,20 @@ function Transactions({ user }) {
                 更新
               </Button>
             </div>
-            <Button type="primary" style={{ marginTop: "16px" }}>
+            <Button
+              type="primary"
+              style={{ marginTop: "16px" }}
+              onClick={() => setIsCreateTransactionModalOpen(true)}
+            >
               新增款項
             </Button>
           </div>
-          <Table columns={getColumns()} dataSource={transactions} rowKey="id" />
+          <Table
+            loading={isLoading}
+            columns={getColumns()}
+            dataSource={transactions}
+            rowKey="id"
+          />
         </Card>
       </Col>
     </Row>

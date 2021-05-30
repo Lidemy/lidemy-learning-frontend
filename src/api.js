@@ -87,7 +87,8 @@ export const deleteSyllabus = params =>
 // transactions
 export const userSelectPlan = payload =>
   instance.post("/transactions/selectPlan", payload);
-export const paidTransaction = id => instance.post(`/transactions/${id}/paid`);
+export const paidTransaction = (id, payload) =>
+  instance.post(`/transactions/${id}/paid`, payload);
 export const getTransactions = params =>
   instance.get("/transactions", { params });
 export const createTransaction = payload =>
