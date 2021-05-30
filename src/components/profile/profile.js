@@ -198,8 +198,7 @@ class Profile extends Component {
       userReports,
       isLoadingGetUserReports,
       isLoadingDeleteReport,
-      isLoadingUpdateReport,
-      user
+      isLoadingUpdateReport
     } = this.props;
 
     const wordCount = (userProfile && userProfile.wordCount) || "";
@@ -220,7 +219,7 @@ class Profile extends Component {
     return (
       <div className="profile-page">
         {isLoading && <Loading />}
-        <TransactionContainer />
+        {isMyProfile && <TransactionContainer />}
         <ReportModal
           visible={showModal}
           instance={instance}

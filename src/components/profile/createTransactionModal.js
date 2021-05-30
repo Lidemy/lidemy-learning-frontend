@@ -1,6 +1,5 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { Modal, Input, message } from "antd";
-import storage from "../../utils/storage";
 
 const CreateTransactionModel = ({ visible, onCancel, onConfirm }) => {
   const [name, setName] = useState("");

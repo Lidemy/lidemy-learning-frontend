@@ -1,13 +1,11 @@
-import React, { Component, useState, useEffect } from "react";
+/* eslint-disable jsx-a11y/anchor-is-valid */
+import React, { useState, useEffect } from "react";
 import {
   Alert,
   Button,
   Card,
-  List,
-  Comment,
   Row,
   Col,
-  Calendar,
   Input,
   Table,
   Modal,
@@ -296,9 +294,11 @@ function Transactions({ user }) {
             {priceType === "A" ? "求職" : "買斷"}方案，要換方案的話請直接私訊
             @huli
           </p>
-          <p>
+          <p style={{ whiteSpace: "pre" }}>
             <h4>付款資訊</h4>
-            12345
+            {decodeURIComponent(
+              "%E9%8A%80%E8%A1%8C%E4%BB%A3%E8%99%9F%EF%BC%9A808%0A%E5%B8%B3%E8%99%9F%EF%BC%9A0521-979-142266%0A%E5%B8%B3%E8%99%9F%E7%84%A1%E7%AC%A6%E8%99%9F%E7%89%88%EF%BC%9A0521979142266"
+            )}
           </p>
           <div style={{ marginTop: "12px", marginBottom: "8px" }}>
             <div>
