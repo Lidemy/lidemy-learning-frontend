@@ -322,7 +322,7 @@ function Transactions({ user }) {
             </div>
             <Button
               type="primary"
-              style={{ marginTop: "16px" }}
+              style={{ marginTop: "16px", display: "none" }}
               onClick={() => setIsCreateTransactionModalOpen(true)}
             >
               新增款項
