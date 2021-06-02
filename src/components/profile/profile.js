@@ -19,6 +19,7 @@ import Markdown from "../common/markdown";
 import moment from "moment";
 import Loading from "../loading";
 import ReportModal from "./reportModal";
+import TransactionContainer from "../../containers/transactionContainer";
 
 const START_DATE = "2021-04-12";
 const pageSize = 10;
@@ -215,10 +216,10 @@ class Profile extends Component {
 
     const isLoading =
       isLoadingDeleteReport || isLoadingUpdateReport || isLoadingGetUserReports;
-
     return (
       <div className="profile-page">
         {isLoading && <Loading />}
+        {isMyProfile && <TransactionContainer />}
         <ReportModal
           visible={showModal}
           instance={instance}

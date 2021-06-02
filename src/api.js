@@ -83,3 +83,18 @@ export const updateSyllabus = (params, payload) =>
   instance.put("/syllabus", payload, { params });
 export const deleteSyllabus = params =>
   instance.delete("/syllabus", { params });
+
+// transactions
+export const userSelectPlan = payload =>
+  instance.post("/transactions/selectPlan", payload);
+export const paidTransaction = (id, payload) =>
+  instance.post(`/transactions/${id}/paid`, payload);
+export const getTransactions = params =>
+  instance.get("/transactions", { params });
+export const getAdminTransactions = params =>
+  instance.get("/admin/transactions", { params });
+export const createTransaction = payload =>
+  instance.post("/transactions", payload);
+export const deleteTransaction = id => instance.delete("/transactions/" + id);
+export const updateTransaction = (id, params) =>
+  instance.put("/transactions/" + id, params);

@@ -12,6 +12,7 @@ import {
 import Loading from "../loading";
 import Markdown from "../common/markdown";
 import { getDropUsers, getUserReports } from "../../api";
+import TransactionArea from "./transactionArea";
 import moment from "moment";
 
 const { RangePicker } = DatePicker;
@@ -112,6 +113,7 @@ const Dashboard = () => {
 
   return (
     <div>
+      <TransactionArea />
       <Title>學生狀態列表</Title>
       {!!dropUsers.length && <div>共 {dropUsers.length} 位不符合條件</div>}
       <div className="mt3 mb3">
