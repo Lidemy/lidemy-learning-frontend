@@ -31,7 +31,7 @@ function PlanSelectionBlock({ user }) {
   const [isPlanSelectLoading, setIsPlanSelectLoading] = useState(false);
 
   const selectPlan = plan => {
-    const planName = plan === "A" ? "A 買斷方案" : "B 求職方案";
+    const planName = plan === "A" ? "A 求職方案" : "B 買斷方案";
     const content =
       plan === "A"
         ? "保證金 5000 元"
