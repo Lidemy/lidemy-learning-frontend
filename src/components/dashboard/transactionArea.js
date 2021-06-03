@@ -27,12 +27,14 @@ function TransactionArea() {
     setIsCreateTransactionModalOpen
   ] = useState(false);
   const [page, setPage] = useState(1);
+  const [filters, setFilters] = useState({});
   const [transactionCount, setTransactionCount] = useState(0);
 
   function getTransactionsData() {
     setIsLoading(true);
     getAdminTransactions({
-      page
+      page,
+      status: filters.status && filters.status[0]
     })
       .then(res => {
         setIsLoading(false);
@@ -84,9 +86,30 @@ function TransactionArea() {
         key: "amount"
       },
       {
+        title: "後五碼",
+        dataIndex: "bankCode",
+        key: "bankCode"
+      },
+      {
         title: "狀態",
         dataIndex: "status",
         key: "status",
+        filterMultiple: false,
+        filters: [
+          {
+            text: "未付款",
+            value: "pending"
+          },
+          {
+            text: "確認中",
+            value: "confirming"
+          },
+          {
+            text: "已付款",
+            value: "paid"
+          }
+        ],
+        filtered: true,
         render: (status, record) => {
           if (record.isDelete) return "已刪除";
           if (status === "pending") return "未付款";
@@ -171,6 +194,7 @@ function TransactionArea() {
 
   function handleTableChange(pagination, filters) {
     setPage(pagination.current);
+    setFilters(filters);
   }
 
   function handleCreateModalConfirm(data) {
@@ -192,7 +216,7 @@ function TransactionArea() {
     () => {
       getTransactionsData();
     },
-    [page]
+    [page, filters]
   );
 
   return (
