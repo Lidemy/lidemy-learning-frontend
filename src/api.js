@@ -98,3 +98,15 @@ export const createTransaction = payload =>
 export const deleteTransaction = id => instance.delete("/transactions/" + id);
 export const updateTransaction = (id, params) =>
   instance.put("/transactions/" + id, params);
+
+// articles
+export const getArticles = params => instance.get("/articles", { params });
+export const getArticle = id => instance.get("/articles/" + id);
+export const createArticle = payload => instance.post("/articles", payload);
+export const deleteArticle = id => instance.delete("/articles/" + id);
+export const updateArticle = (id, params) =>
+  instance.put("/articles/" + id, params);
+export const createComment = payload => instance.post("/comments", payload);
+export const deleteComment = id => instance.delete("/comments/" + id);
+export const updateComment = (id, params) =>
+  instance.put("/comment/" + id, params);

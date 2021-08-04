@@ -96,6 +96,32 @@ code {
   grid-template-columns: 1fr;
 }
 
+.interviews > div:nth-child(2) {
+  margin-top: 4px;
+}
+
+.interviews > div.b > span {
+  margin: 0;
+}
+
+@media screen and (min-width: 768px) {
+  .interviews {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .interviews > div.b > span {
+    margin-left: 0.5rem;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .ant-card-head-title {
+    white-space: pre-wrap;
+  }
+}
+
 @media screen and (max-width: 1025px) {
   .grid-container {
     grid-template-columns: repeat(auto-fit, minmax(45%, 1fr));

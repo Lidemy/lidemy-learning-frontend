@@ -4,7 +4,7 @@ import ReactMarkdown from "react-markdown";
 import ReactMarkdownWithHtml from "react-markdown/with-html";
 import gfm from "remark-gfm";
 
-import React from "react";
+import React, { memo } from "react";
 
 const CodeBlock = ({ language, value }) => {
   return (
@@ -35,4 +35,4 @@ const Markdown = ({ source, allowHtml }) => {
   );
 };
 
-export default Markdown;
+export default memo(Markdown);
