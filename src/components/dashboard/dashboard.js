@@ -6,8 +6,7 @@ import {
   InputNumber,
   Collapse,
   Row,
-  Col,
-  Button
+  Col
 } from "antd";
 import Loading from "../loading";
 import Markdown from "../common/markdown";
@@ -31,12 +30,15 @@ const Report = ({ report }) => {
 };
 
 const UserPanel = ({ user, key }) => (
-  <Collapse.Panel key={key} header={`${user.nickname}(${user.count})`}>
+  <Collapse.Panel
+    key={key}
+    header={`${user.nickname}(${user.count}), ${user.priceType}`}
+  >
     <Row>
       <div>
-        <Button type="link" target={`/users/${user.id}`}>
+        <a href={`/users/${user.id}`} target="_blank" rel="noopener noreferrer">
           個人檔案
-        </Button>
+        </a>
         <span className="ml2 mr2">方案：{user.priceType}</span>
         <span>作業數：{user.hw}</span>
       </div>
