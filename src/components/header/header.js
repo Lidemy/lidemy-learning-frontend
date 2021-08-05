@@ -39,6 +39,7 @@ class Header extends Component {
     if (pathname.indexOf("/admin/news") === 0) return "adminNews";
     if (pathname.indexOf("/admin/dashboard") === 0) return "dashbaord";
     if (pathname.indexOf("/course") === 0) return "course";
+    if (pathname.indexOf("/interviews") === 0) return "interviews";
     return "home";
   };
 
@@ -104,6 +105,11 @@ class Header extends Component {
           {user && (
             <Menu.Item key="reports">
               <Link to="/reports">進度報告</Link>
+            </Menu.Item>
+          )}
+          {user && (
+            <Menu.Item key="interviews">
+              <Link to="/interviews">面試心得</Link>
             </Menu.Item>
           )}
           {user && (

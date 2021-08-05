@@ -13,6 +13,9 @@ import Reviews from "../components/reviews";
 import TA from "../components/ta";
 import Syllabus from "../components/syllabus";
 import Dashboard from "../components/dashboard";
+import Interviews from "../components/interviews";
+import InterviewPost from "../components/interviews/interviewPost";
+import NewInterviewPost from "../components/interviews/newInterviewPost";
 
 const Routes = ({ user }) => {
   if (!user) {
@@ -29,6 +32,9 @@ const Routes = ({ user }) => {
       <Route path="/reports" component={Reports} />
       <Route path="/profile" component={Profile} />
       <Route path="/users/:id" component={Profile} />
+      <Route path="/interviews/new" component={NewInterviewPost} />
+      <Route path="/interviews/:id" component={InterviewPost} />
+      <Route path="/interviews" component={Interviews} />
       {user.isStudent && <Route path="/course" component={Course} />}
       {user.isStudent && <Route path="/homeworks" component={Homeworks} />}
       {user.isTA && <Route path="/reviews" component={Reviews} />}

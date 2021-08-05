@@ -65,34 +65,40 @@ const Editor = ({ rows, showButton, onChange, onAdd, value, onSubmit }) => {
             <TextArea rows={rows || 15} onChange={onChange} value={value} />
             {showButton && (
               <div className="flex justify-between flex-wrap mt1">
-                <div>
-                  <Select
-                    value={undefined}
-                    placeholder="選擇模板"
-                    style={{ width: 120, marginRight: "15px" }}
-                    onChange={handleChange}
-                  >
-                    {templates &&
-                      templates.map(item => (
-                        <Option className="ant-option" key={item.id} value={item.id}>
-                          <span>{item.name}</span>
-                          <Button
-                            type="link"
-                            icon="delete"
-                            size="small"
-                            onClick={e => deleteTemplate(e, item.id)}
-                          />
-                        </Option>
-                      ))}
-                  </Select>
-                  <Button
-                    type="primary"
-                    shape="circle"
-                    icon="plus"
-                    size="small"
-                    onClick={() => setShowTemplateModal(true)}
-                  />
-                </div>
+                {onAdd && (
+                  <div>
+                    <Select
+                      value={undefined}
+                      placeholder="選擇模板"
+                      style={{ width: 120, marginRight: "15px" }}
+                      onChange={handleChange}
+                    >
+                      {templates &&
+                        templates.map(item => (
+                          <Option
+                            className="ant-option"
+                            key={item.id}
+                            value={item.id}
+                          >
+                            <span>{item.name}</span>
+                            <Button
+                              type="link"
+                              icon="delete"
+                              size="small"
+                              onClick={e => deleteTemplate(e, item.id)}
+                            />
+                          </Option>
+                        ))}
+                    </Select>
+                    <Button
+                      type="primary"
+                      shape="circle"
+                      icon="plus"
+                      size="small"
+                      onClick={() => setShowTemplateModal(true)}
+                    />
+                  </div>
+                )}
                 <Button
                   type="primary"
                   onClick={onSubmit}

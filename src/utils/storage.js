@@ -5,6 +5,8 @@ const showOneColumn = "show-one-column";
 const lastReadId = "last-read-id";
 const templateKey = "report-template";
 const bankCodeKey = "bank-code";
+const interviewContent = "interview-content";
+const interviewTitle = "interview-title";
 
 const isLocalStorageAvailable = () => {
   try {
@@ -46,6 +48,22 @@ const storage = {
 
   getTempReport: text => {
     return storage.get(tempReport);
+  },
+
+  setInterviewTitle: text => {
+    storage.set(interviewTitle, text);
+  },
+
+  getInterviewTitle: text => {
+    return storage.get(interviewTitle);
+  },
+
+  setInterviewContent: text => {
+    storage.set(interviewContent, text);
+  },
+
+  getInterviewContent: text => {
+    return storage.get(interviewContent);
   },
 
   setBankCode: text => {
