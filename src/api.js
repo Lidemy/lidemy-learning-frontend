@@ -106,6 +106,7 @@ export const createArticle = payload => instance.post("/articles", payload);
 export const deleteArticle = id => instance.delete("/articles/" + id);
 export const updateArticle = (id, params) =>
   instance.put("/articles/" + id, params);
+export const getComments = params => instance.get("/comments", { params });
 export const createComment = payload => instance.post("/comments", payload);
 export const deleteComment = id => instance.delete("/comments/" + id);
 export const updateComment = (id, params) =>

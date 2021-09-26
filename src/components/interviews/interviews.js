@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react";
 import { List, Avatar, Row, Col, Card, Tag, Button, Input } from "antd";
 import moment from "moment";
-import { getArticles } from "../../api";
+import { getArticles, getComments } from "../../api";
 import Loading from "../loading";
+import Markdown from "../common/markdown";
 
 const { Search } = Input;
 
@@ -60,9 +61,46 @@ function ListItem({ item }) {
   );
 }
 
+function CommentList({ comments }) {
+  return (
+    <List
+      itemLayout="horizontal"
+      dataSource={comments}
+      locale={{
+        emptyText: "暫無留言"
+      }}
+      renderItem={item => {
+        return (
+          <List.Item>
+            <List.Item.Meta
+              avatar={<Avatar src={item.User.picture} />}
+              title={
+                <div>
+                  {item.User.nickname}&nbsp; 留言在{" "}
+                  <a
+                    href={`/interviews/${item.Article.id}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    {item.Article.title}
+                  </a>
+                  <br />
+                  {moment(item.createdAt).format("llll")}
+                </div>
+              }
+              description={<Markdown source={item.content} />}
+            />
+          </List.Item>
+        );
+      }}
+    />
+  );
+}
+
 function Interviews() {
   const [isLoading, setIsLoading] = useState(false);
   const [articles, setArticles] = useState([]);
+  const [comments, setComments] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [total, setTotal] = useState(0);
   const [keyword, setKeyword] = useState("");
@@ -79,6 +117,11 @@ function Interviews() {
   useEffect(
     () => {
       setIsLoading(true);
+      getComments({
+        page: 1
+      }).then(res => {
+        setComments(res.data);
+      });
       getArticles({
         page: currentPage,
         keyword
@@ -96,9 +139,18 @@ function Interviews() {
     [currentPage, keyword]
   );
 
+  console.log(comments);
+
   return (
     <div>
       {isLoading && <Loading />}
+      <Row gutter={16}>
+        <Col md={32}>
+          <Card title="最新五則留言" bordered={false}>
+            <CommentList comments={comments} />
+          </Card>
+        </Col>
+      </Row>
       <Row gutter={16}>
         <Col md={32}>
           <Card title="面試心得" bordered={false}>
