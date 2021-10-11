@@ -216,7 +216,7 @@ const NotePanel = ({ userId, notes, handleCreate, handleDelete }) => (
 const Course = () => {
   const section = new Date() - new Date("2021-04-12");
   const weekUnit = 7 * 24 * 60 * 60 * 1000;
-  const current = Math.ceil((section < 0 ? 1 : section) / weekUnit);
+  const current = Math.max(Math.ceil((section < 0 ? 1 : section) / weekUnit), 26);
 
   const [syllabusWeek, setSyllabusWeek] = useState(current);
   const [isCollapseAll, setIsCollapseAll] = useState(false);
